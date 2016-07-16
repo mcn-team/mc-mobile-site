@@ -1,0 +1,8 @@
+# IDE Files
+.idea/
+
+# Local resources
+node_modules/
+
+#Logs
+*.log
