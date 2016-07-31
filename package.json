@@ -1,0 +1,39 @@
+{
+  "name": "mc-mobile-site",
+  "version": "0.0.1",
+  "description": "Media Collection Mobile Site - Light mobile to quickly see what's missing and what to buy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcn-team/mc-mobile-site.git"
+  },
+  "keywords": [
+    "media-collection"
+  ],
+  "author": "Kaze",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcn-team/mc-mobile-site/issues"
+  },
+  "homepage": "https://github.com/mcn-team/mc-mobile-site#readme",
+  "devDependencies": {
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.11.1",
+    "browser-sync": "2.13.0",
+    "connect-history-api-fallback": "1.2.0",
+    "gulp": "3.9.1",
+    "webpack": "1.13.1",
+    "webpack-stream": "3.2.0"
+  },
+  "dependencies": {
+    "lodash": "4.14.1",
+    "react": "15.2.1",
+    "react-dom": "15.2.1",
+    "react-redux": "4.4.5",
+    "redux": "3.5.2"
+  }
+}
