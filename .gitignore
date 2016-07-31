@@ -3,6 +3,7 @@
 
 # Local resources
 node_modules/
+client/dist/
 
-#Logs
+# Logs
 *.log
