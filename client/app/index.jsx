@@ -5,6 +5,10 @@ import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import App from './app';
 
 Render(
-    <App />,
+    <Router history={browserHistory}>
+        <Route path="/" component={App}>
+            <IndexRoute />
+        </Route>
+    </Router>,
     document.getElementById('app')
 );
