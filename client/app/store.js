@@ -10,11 +10,11 @@ import { LOGIN_FAIL_TYPE, LOGIN_START_TYPE, LOGIN_SUCCESS_TYPE } from './compone
 const login = (state = {}, action) => {
     switch (action.type) {
         case LOGIN_START_TYPE:
-            return Object.assign({}, state, { fetching: true });
+            return Object.assign({}, state, { fetching: true, status: action.status, message: action.message });
         case LOGIN_SUCCESS_TYPE:
-            return Object.assign({}, state, {});
+            return Object.assign({}, state, { fetching: false, status: action.status, message: action.message });
         case LOGIN_FAIL_TYPE:
-            return Object.assign({}, state, {});
+            return Object.assign({}, state, { fetching: false, status: action.status, message: action.message });
         default:
             return state;
     }

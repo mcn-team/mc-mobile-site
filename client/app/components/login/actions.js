@@ -5,7 +5,10 @@ export const LOGIN_SUCCESS_TYPE = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL_TYPE = 'LOGIN_FAIL';
 
 export const LOGIN_SUCCESS = {
-    type: LOGIN_SUCCESS_TYPE
+    type: LOGIN_SUCCESS_TYPE,
+    status: '',
+    message: null
+
 };
 
 export const LOGIN_FAIL = {
