@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
 
-import { LOGIN_FAIL, LOGIN_SUCCESS } from './actions';
+import { loginAction } from './actions';
 import FormInputComponent from '../commons/form-input';
 import FormButtonComponent from '../commons/form-button';
 
@@ -30,11 +30,7 @@ class LoginForm extends React.Component {
                         type="submit"
                         text="Sign in"
                         action={() => {
-                            let action = LOGIN_FAIL;
-                            if (form.username.state.value === 'Kaze' && form.password.state.value === 'yolo') {
-                                action = LOGIN_SUCCESS;
-                            }
-                            this.props.dispatch(action);
+                            this.props.dispatch(loginAction(form.username.state.value, form.password.state.value));
                         }}
                     />
                 </form>

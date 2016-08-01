@@ -24,13 +24,22 @@ const BUNDLE_FILES = [
     'client/dist/style.css'
 
 ];
+const LIB_FILES = [
+    'node_modules/js-md5/build/md5.min.js',
+    'node_modules/jsencrypt/bin/jsencrypt.min.js'
+];
+
+gulp.task('libs', () => {
+    return gulp.src(LIB_FILES)
+        .pipe(gulp.dest('client/dist/libs/'));
+});
 
 gulp.task('styles', () => {
     return gulp.src(CSS_FILES)
         .pipe(gulp.dest('client/dist/css/'));
 });
 
-gulp.task('bundle', ['styles'], () => {
+gulp.task('bundle', ['styles', 'libs'], () => {
     return gulp.src('./entry.js')
         .pipe(webpackStream(require('./webpack.config.js'), webpack))
         .pipe(gulp.dest('client/dist/'));
