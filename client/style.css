@@ -1,0 +1,31 @@
+* { letter-spacing: 2px; }
+html { background-color: #272b30; }
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #c8c8c8;
+}
+
+/* OVERRIDING BULMA STYLE */
+button.linear-grey,
+.box {
+  background: linear-gradient(#484e55, #3a3f44 60%, #313539) no-repeat;
+  color: #ddd;
+  border-color: #000;
+}
+.text-important { font-weight: bold; }
+.has-control-centered > .control { text-align: center; }
+.title { color: #dddddd; }
+.subtitle { color: #cccccc; }
+.label { color: #c8c8c8; }
+::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
+input:-moz-placeholder { color:#444; }
+.control > input { background-color: #ddd }
+.help.larger { font-size: 14px; }
+.spacer { margin-top: 10%; }
+.box.mini { padding: 10px; }
+.box:not(:last-child).mini { margin-bottom: 15px; }

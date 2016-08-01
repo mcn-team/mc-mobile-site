@@ -26,6 +26,9 @@
     "browser-sync": "2.13.0",
     "connect-history-api-fallback": "1.2.0",
     "gulp": "3.9.1",
+    "gulp-clean-css": "2.0.12",
+    "gulp-dest": "0.2.3",
+    "gulp-inject": "4.1.0",
     "webpack": "1.13.1",
     "webpack-stream": "3.2.0"
   },
