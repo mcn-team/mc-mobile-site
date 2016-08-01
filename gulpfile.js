@@ -19,8 +19,10 @@ const CSS_FILES = [
     'node_modules/bulma/css/bulma.css',
     'client/style.css'
 ];
-const BUNDLE_FILE = [
-    'client/dist/bundle.js'
+const BUNDLE_FILES = [
+    'client/dist/bundle.js',
+    'client/dist/style.css'
+
 ];
 
 gulp.task('styles', () => {
@@ -44,15 +46,16 @@ gulp.task('browsersync', ['bundle'], () => {
             // http://localhost:8080/#/home (hash system)
             middleware: [ historyApiFallback() ]
         },
-        port: 3000,
+        port: 4141,
         open: false
     });
 
-    gulp.watch(BUNDLE_FILE, reload);
+    gulp.watch(BUNDLE_FILES, reload);
 });
 
 gulp.task('watch', ['browsersync'], () => {
     gulp.watch(_.union(JS_FILES, JSX_FILES), ['bundle']);
+    gulp.watch(CSS_FILES, ['styles']);
 });
 
 gulp.task('serve', ['watch']);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ButtonComponent extends React.Component {
+export default class FormButtonComponent extends React.Component {
     constructor(props) {
         super(props);
 
