@@ -7,16 +7,26 @@ const historyApiFallback = require('connect-history-api-fallback');
 const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const _ = require('lodash');
+const inject = require('gulp-inject');
 
 const JS_FILES = [];
-const JSX_FILES = [];
-const CSS_FILES = [];
-
+const JSX_FILES = [
+    'client/app/**/*.jsx'
+];
+const CSS_FILES = [
+    'node_modules/bulma/css/bulma.css',
+    'client/style.css'
+];
 const BUNDLE_FILE = [
     'client/dist/bundle.js'
 ];
 
-gulp.task('bundle', () => {
+gulp.task('styles', () => {
+    return gulp.src(CSS_FILES)
+        .pipe(gulp.dest('client/dist/css/'));
+});
+
+gulp.task('bundle', ['styles'], () => {
     return gulp.src('./entry.js')
         .pipe(webpackStream(require('./webpack.config.js'), webpack))
         .pipe(gulp.dest('client/dist/'));
