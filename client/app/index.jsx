@@ -3,11 +3,12 @@ import { render as Render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
 import App from './app';
+import LoginPage from './components/pages/login-page';
 
 Render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <IndexRoute />
+            <IndexRoute component={LoginPage} />
         </Route>
     </Router>,
     document.getElementById('app')

@@ -9,7 +9,9 @@ const webpack = require('webpack');
 const _ = require('lodash');
 const inject = require('gulp-inject');
 
-const JS_FILES = [];
+const JS_FILES = [
+    'client/app/**/*.js'
+];
 const JSX_FILES = [
     'client/app/**/*.jsx'
 ];
