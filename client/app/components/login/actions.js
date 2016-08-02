@@ -61,7 +61,7 @@ const loginCall = (dispatch, username, password, publicKey) => {
         })
         .then((response) => {
             if (response.error) {
-                response.data.catch((json) => {
+                response.data.then((json) => {
                     dispatch(loginFailure(json.message));
                 });
             } else {
