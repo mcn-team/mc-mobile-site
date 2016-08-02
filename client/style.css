@@ -20,9 +20,9 @@ button.linear-grey,
 .title { color: #dddddd; }
 .subtitle { color: #cccccc; }
 .label { color: #c8c8c8; }
-::-webkit-input-placeholder,
-::-moz-placeholder,
-:-ms-input-placeholder,
+::-webkit-input-placeholder { color:#444; }
+::-moz-placeholder { color:#444; }
+:-ms-input-placeholder { color:#444; }
 input:-moz-placeholder { color:#444; }
 .control > input { background-color: #ddd }
 .help.larger { font-size: 14px; }

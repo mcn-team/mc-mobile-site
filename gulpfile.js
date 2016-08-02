@@ -9,7 +9,9 @@ const webpack = require('webpack');
 const _ = require('lodash');
 const inject = require('gulp-inject');
 
-const JS_FILES = [];
+const JS_FILES = [
+    'client/app/**/*.js'
+];
 const JSX_FILES = [
     'client/app/**/*.jsx'
 ];
@@ -17,16 +19,27 @@ const CSS_FILES = [
     'node_modules/bulma/css/bulma.css',
     'client/style.css'
 ];
-const BUNDLE_FILE = [
-    'client/dist/bundle.js'
+const BUNDLE_FILES = [
+    'client/dist/bundle.js',
+    'client/dist/style.css'
+
 ];
+const LIB_FILES = [
+    'node_modules/js-md5/build/md5.min.js',
+    'node_modules/jsencrypt/bin/jsencrypt.min.js'
+];
+
+gulp.task('libs', () => {
+    return gulp.src(LIB_FILES)
+        .pipe(gulp.dest('client/dist/libs/'));
+});
 
 gulp.task('styles', () => {
     return gulp.src(CSS_FILES)
         .pipe(gulp.dest('client/dist/css/'));
 });
 
-gulp.task('bundle', ['styles'], () => {
+gulp.task('bundle', ['styles', 'libs'], () => {
     return gulp.src('./entry.js')
         .pipe(webpackStream(require('./webpack.config.js'), webpack))
         .pipe(gulp.dest('client/dist/'));
@@ -42,15 +55,16 @@ gulp.task('browsersync', ['bundle'], () => {
             // http://localhost:8080/#/home (hash system)
             middleware: [ historyApiFallback() ]
         },
-        port: 3000,
+        port: 4141,
         open: false
     });
 
-    gulp.watch(BUNDLE_FILE, reload);
+    gulp.watch(BUNDLE_FILES, reload);
 });
 
 gulp.task('watch', ['browsersync'], () => {
     gulp.watch(_.union(JS_FILES, JSX_FILES), ['bundle']);
+    gulp.watch(CSS_FILES, ['styles']);
 });
 
 gulp.task('serve', ['watch']);
