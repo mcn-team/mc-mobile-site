@@ -12,12 +12,12 @@ export default class HomeMenu extends React.Component {
             <div className="columns is-mobile is-marginless" >
                 <div className="column is-6 is-offset-3 tile has-text-centered" >
                     <HomeButton
-                        icon="http://icons.iconarchive.com/icons/itzikgur/my-seven/512/Books-2-icon.png"
+                        icon="dist/img/collections-icon.png"
                         label="Collections List"
                         path="/collections"
                     />
                     <HomeButton
-                        icon="http://www.apkdad.com/wp-content/uploads/2012/10/Barcode-Scanner-Icon.png"
+                        icon="dist/img/add-icon.png"
                         label="Add Book"
                         path="/scan"
                         disabled="true"

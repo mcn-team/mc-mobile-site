@@ -28,6 +28,14 @@ const LIB_FILES = [
     'node_modules/js-md5/build/md5.min.js',
     'node_modules/jsencrypt/bin/jsencrypt.min.js'
 ];
+const ASSETS_FILES = [
+    'client/app/assets/**/*.*'
+];
+
+gulp.task('assets', () => {
+    return gulp.src(ASSETS_FILES)
+        .pipe(gulp.dest('client/dist/'));
+});
 
 gulp.task('libs', () => {
     return gulp.src(LIB_FILES)
@@ -39,7 +47,7 @@ gulp.task('styles', () => {
         .pipe(gulp.dest('client/dist/css/'));
 });
 
-gulp.task('bundle', ['styles', 'libs'], () => {
+gulp.task('bundle', ['styles', 'libs', 'assets'], () => {
     return gulp.src('./entry.js')
         .pipe(webpackStream(require('./webpack.config.js'), webpack))
         .pipe(gulp.dest('client/dist/'));
