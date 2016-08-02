@@ -26,7 +26,8 @@ const LOGIN_START = {
 const loginSuccess = (response) => {
     return {
         type: LOGIN_SUCCESS_TYPE,
-        response: response
+        user: response.user,
+        token: response.token
     };
 };
 
@@ -61,9 +62,15 @@ const loginCall = (dispatch, username, password, publicKey) => {
         })
         .then((response) => {
             if (response.error) {
-                response.data.catch((json) => {
-                    dispatch(loginFailure(json.message));
-                });
+                response.data
+                    .then((json) => {
+                        dispatch(loginFailure(json.message));
+                    })
+                    // Fix to resolve the string response of the server
+                    // TODO: remove it after MC 0.2.2 is released
+                    .catch((json) => {
+                        dispatch(loginFailure(json.message));
+                    });
             } else {
                 response.data.then((json) => {
                     dispatch(loginSuccess(json));

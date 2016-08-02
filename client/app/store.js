@@ -12,7 +12,7 @@ const login = (state = {}, action) => {
         case LOGIN_START_TYPE:
             return Object.assign({}, state, { fetching: true });
         case LOGIN_SUCCESS_TYPE:
-            return Object.assign({}, state, { fetching: false, response: action.response, message: null });
+            return Object.assign({}, state, { fetching: false, user: Object.assign({}, action.user), token: action.token, message: null });
         case LOGIN_FAIL_TYPE:
             return Object.assign({}, state, { fetching: false, status: action.status, message: action.message });
         default:

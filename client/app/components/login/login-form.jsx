@@ -4,10 +4,19 @@ import { connect as Connect } from 'react-redux';
 import { loginAction } from './actions';
 import FormInputComponent from '../commons/form-input';
 import FormButtonComponent from '../commons/form-button';
+import { LocalStorage } from '../../utils/browser-storages';
 
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentWillUpdate(nextProps) {
+        if (nextProps && nextProps.login && nextProps.login.token) {
+            LocalStorage.setItem('user', nextProps.login.user);
+            LocalStorage.setItem('token', nextProps.login.token);
+            //TODO: redirect to home page
+        }
     }
 
     render() {
