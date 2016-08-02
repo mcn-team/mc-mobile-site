@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk';
  * Actions type imports
  */
 
-import { LOGIN_FAIL_TYPE, LOGIN_START_TYPE, LOGIN_SUCCESS_TYPE } from './components/login/actions';
+import { LOGIN_FAIL_TYPE, LOGIN_START_TYPE, LOGIN_SUCCESS_TYPE } from './components/login-page/actions';
 
 const login = (state = {}, action) => {
     switch (action.type) {
