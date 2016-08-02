@@ -12,6 +12,12 @@ class LoginForm extends React.Component {
         super(props);
     }
 
+    componentWillMount() {
+        if (LocalStorage.getItem('user') && LocalStorage.getItem('token')) {
+            browserHistory.push('/home');
+        }
+    }
+
     componentWillUpdate(nextProps) {
         if (nextProps && nextProps.login && nextProps.login.token) {
             LocalStorage.setItem('user', nextProps.login.user);
