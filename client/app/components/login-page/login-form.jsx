@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import { loginAction } from './actions';
 import FormInputComponent from '../commons/form-input';
@@ -15,7 +16,7 @@ class LoginForm extends React.Component {
         if (nextProps && nextProps.login && nextProps.login.token) {
             LocalStorage.setItem('user', nextProps.login.user);
             LocalStorage.setItem('token', nextProps.login.token);
-            //TODO: redirect to home page
+            browserHistory.push('/home');
         }
     }
 
