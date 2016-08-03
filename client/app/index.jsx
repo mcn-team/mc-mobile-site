@@ -5,12 +5,14 @@ import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import App from './app';
 import LoginPage from './components/login-page/login-page';
 import HomePage from './components/home-page/home-page';
+import CollectionListPage from './components/collections-list-page/collections-list-page';
 
 Render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={LoginPage} />
             <Route path="/home" component={HomePage} />
+            <Route path="/collections" component={CollectionListPage} />
         </Route>
     </Router>,
     document.getElementById('app')
