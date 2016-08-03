@@ -6,6 +6,14 @@ export default class HomeButton extends React.Component {
         super(props);
     }
 
+    static get propTypes() {
+        return {
+            icon: React.PropTypes.string,
+            label: React.PropTypes.string,
+            path: React.PropTypes.string
+        };
+    }
+
     render() {
         return (
             <div className={"tile is-vertical box" + (this.props.disabled ? ' is-disabled' : '')}>

@@ -15,6 +15,15 @@ export default class FormButtonComponent extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
 
+    static get propTypes() {
+        return {
+            size: React.PropTypes.oneOf(['small', 'normal', 'medium', 'large']),
+            type: React.PropTypes.oneOf(['submit', 'button', 'reset']),
+            text: React.PropTypes.string,
+            action: React.PropTypes.func
+        };
+    }
+
     onClick(event) {
         event.preventDefault();
         this.props.action();
