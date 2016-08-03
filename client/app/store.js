@@ -21,7 +21,9 @@ const login = (state = {}, action) => {
     }
 };
 
-const collections = (state = {}, action) => {
+const defaultCollectionState = { response: [] };
+
+const collections = (state = defaultCollectionState, action) => {
     switch (action.type) {
         case FETCH_COLLECTIONS_START_TYPE:
             return Object.assign({}, state, { fetching: true });
