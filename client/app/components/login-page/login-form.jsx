@@ -2,7 +2,7 @@ import React from 'react';
 import { connect as Connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
-import { loginAction } from './actions';
+import { loginAction } from './login-actions';
 import FormInputComponent from '../commons/form-input';
 import FormButtonComponent from '../commons/form-button';
 import { Authentication } from '../../utils/authentication-helper';

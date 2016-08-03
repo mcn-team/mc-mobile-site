@@ -3,7 +3,7 @@ import { connect as Connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
-import { fetchCollectionAction } from './actions';
+import { fetchCollectionAction } from './collections-list-actions';
 import { CollectionItem } from './collection-item';
 import { Authentication } from '../../utils/authentication-helper';
 

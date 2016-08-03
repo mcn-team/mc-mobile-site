@@ -8,18 +8,15 @@ import thunkMiddleware from 'redux-thunk';
 import {
     LOGIN_FAIL_TYPE,
     LOGIN_START_TYPE,
-    LOGIN_SUCCESS_TYPE
-} from './components/login-page/actions';
+    LOGIN_SUCCESS_TYPE } from './components/login-page/login-actions';
 import {
     FETCH_COLLECTIONS_FAIL_TYPE,
     FETCH_COLLECTIONS_START_TYPE,
-    FETCH_COLLECTIONS_SUCCESS_TYPE
-} from './components/collections-list-page/actions';
+    FETCH_COLLECTIONS_SUCCESS_TYPE } from './components/collections-list-page/collections-list-actions';
 import {
     FETCH_DETAILS_FAIL_TYPE,
     FETCH_DETAILS_START_TYPE,
-    FETCH_DETAILS_SUCCESS_TYPE
-} from './components/details-page/details-actions';
+    FETCH_DETAILS_SUCCESS_TYPE } from './components/details-page/details-actions';
 
 const login = (state = {}, action) => {
     switch (action.type) {
