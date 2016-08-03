@@ -12,22 +12,39 @@ body {
 
 /* OVERRIDING BULMA STYLE */
 button.linear-grey,
-
 .box {
   background: linear-gradient(#484e55, #3a3f44 60%, #313539) no-repeat;
   color: #ddd;
   border-color: #000;
 }
 
-.text-important { font-weight: bold; }
-
-.has-control-centered > .control { text-align: center; }
+.control > input { background-color: #ddd }
 
 .title { color: #dddddd; }
 
 .subtitle { color: #cccccc; }
 
 .label { color: #c8c8c8; }
+
+.help.larger { font-size: 14px; }
+
+.box.mini { padding: 10px; }
+
+.box:not(:last-child).mini { margin-bottom: 15px; }
+
+a,
+a:hover { color: #63c55f; }
+
+.is-disabled { opacity: 0.5 }
+
+/* APP STYLE */
+.spacer { margin-top: 10%; }
+
+#collections .box { word-wrap: break-word; }
+
+.text-important { font-weight: bold; }
+
+.has-control-centered > .control { text-align: center; }
 
 ::-webkit-input-placeholder { color:#444; }
 
@@ -36,17 +53,3 @@ button.linear-grey,
 :-ms-input-placeholder { color:#444; }
 
 input:-moz-placeholder { color:#444; }
-
-.control > input { background-color: #ddd }
-
-.help.larger { font-size: 14px; }
-
-.spacer { margin-top: 10%; }
-
-.box.mini { padding: 10px; }
-
-.box:not(:last-child).mini { margin-bottom: 15px; }
-
-a, a:hover { color: #63c55f; }
-
-.is-disabled { opacity: 0.5 }
