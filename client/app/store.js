@@ -5,8 +5,21 @@ import thunkMiddleware from 'redux-thunk';
  * Actions type imports
  */
 
-import { LOGIN_FAIL_TYPE, LOGIN_START_TYPE, LOGIN_SUCCESS_TYPE } from './components/login-page/actions';
-import { FETCH_COLLECTIONS_FAIL_TYPE, FETCH_COLLECTIONS_START_TYPE, FETCH_COLLECTIONS_SUCCESS_TYPE } from './components/collections-list-page/actions';
+import {
+    LOGIN_FAIL_TYPE,
+    LOGIN_START_TYPE,
+    LOGIN_SUCCESS_TYPE
+} from './components/login-page/actions';
+import {
+    FETCH_COLLECTIONS_FAIL_TYPE,
+    FETCH_COLLECTIONS_START_TYPE,
+    FETCH_COLLECTIONS_SUCCESS_TYPE
+} from './components/collections-list-page/actions';
+import {
+    FETCH_DETAILS_FAIL_TYPE,
+    FETCH_DETAILS_START_TYPE,
+    FETCH_DETAILS_SUCCESS_TYPE
+} from './components/details-page/details-actions';
 
 const login = (state = {}, action) => {
     switch (action.type) {
@@ -36,9 +49,23 @@ const collections = (state = defaultCollectionState, action) => {
     }
 };
 
+const details = (state = {}, action) => {
+    switch (action.type) {
+        case FETCH_DETAILS_START_TYPE:
+            return Object.assign({}, state, { fetching: true });
+        case FETCH_DETAILS_FAIL_TYPE:
+            return Object.assign({}, state, { fetching: false, error: Object.assign({}, action.error) });
+        case FETCH_DETAILS_SUCCESS_TYPE:
+            return Object.assign({}, state, { fetching: false, response: [].concat(action.response) });
+        default:
+            return state;
+    }
+};
+
 const appReducers = combineReducers({
     login,
-    collections
+    collections,
+    details
 });
 
 const Store = createStore(appReducers, applyMiddleware(thunkMiddleware));

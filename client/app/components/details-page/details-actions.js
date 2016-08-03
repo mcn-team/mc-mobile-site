@@ -2,32 +2,30 @@ import { HttpClient } from 'aurelia-fetch-client';
 
 import { Authentication } from '../../utils/authentication-helper';
 
-export const FETCH_COLLECTIONS_START_TYPE = 'FETCH_COLLECTIONS_START';
-export const FETCH_COLLECTIONS_SUCCESS_TYPE = 'FETCH_COLLECTIONS_SUCCESS';
-export const FETCH_COLLECTIONS_FAIL_TYPE = 'FETCH_COLLECTIONS_FAIL';
+export const FETCH_DETAILS_START_TYPE = 'FETCH_DETAILS_START';
+export const FETCH_DETAILS_SUCCESS_TYPE = 'FETCH_DETAILS_SUCCESS';
+export const FETCH_DETAILS_FAIL_TYPE = 'FETCH_DETAILS_FAIL';
 
-const FETCH_COLLECTIONS_START = {
-    type: FETCH_COLLECTIONS_START_TYPE
-};
+const FETCH_DETAILS_START = { type: FETCH_DETAILS_START_TYPE };
 
-const fetchCollectionsFailAction = (errorResponse) => {
+const fetchDetailsSuccessAction = (response) => {
     return {
-        type: FETCH_COLLECTIONS_FAIL_TYPE,
-        error: errorResponse
-    };
-};
-
-const fetchCollectionsSuccessAction = (response) => {
-    return {
-        type: FETCH_COLLECTIONS_SUCCESS_TYPE,
+        type: FETCH_DETAILS_SUCCESS_TYPE,
         response: response
     };
 };
 
-export const fetchCollectionAction = () => {
+const fetchDetailsFailAction = (errorResponse) => {
+    return {
+        type: FETCH_DETAILS_FAIL_TYPE,
+        error: errorResponse
+    };
+};
+
+export const fetchDetailsAction = (collectionName) => {
     return (dispatch) => {
-        let httpClient = new HttpClient();
-        dispatch(FETCH_COLLECTIONS_START);
+        const httpClient = new HttpClient();
+        dispatch(FETCH_DETAILS_START);
 
         const options = {
             method: 'GET',
@@ -36,7 +34,7 @@ export const fetchCollectionAction = () => {
             }
         };
 
-        return httpClient.fetch('http://dev.kaze-d.fr/api/books/collections/names', options)
+        return httpClient.fetch('http://dev.kaze-d.fr/api/books/collections/' + collectionName + '/list', options)
             .then((response) => {
                 if (response.ok) {
                     return { data: response.json() };
@@ -47,14 +45,14 @@ export const fetchCollectionAction = () => {
             .then((response) => {
                 if (response.error) {
                     response.data.then((parsedResponse) => {
-                        dispatch(fetchCollectionsFailAction(parsedResponse));
+                        dispatch(fetchDetailsFailAction(parsedResponse));
                     });
                 } else {
                     response.data.then((parsedResponse) => {
-                        dispatch(fetchCollectionsSuccessAction(parsedResponse));
+                        dispatch(fetchDetailsSuccessAction(parsedResponse));
                     });
                 }
 
             });
-    }
+    };
 };
