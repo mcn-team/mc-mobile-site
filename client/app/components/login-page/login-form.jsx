@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import { loginAction } from './actions';
 import FormInputComponent from '../commons/form-input';
 import FormButtonComponent from '../commons/form-button';
-import { LocalStorage } from '../../utils/browser-storages';
+import { Authentication } from '../../utils/authentication-helper';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -13,15 +13,14 @@ class LoginForm extends React.Component {
     }
 
     componentWillMount() {
-        if (LocalStorage.getItem('user') && LocalStorage.getItem('token')) {
+        if (Authentication.isUserLoggedIn()) {
             browserHistory.push('/home');
         }
     }
 
     componentWillUpdate(nextProps) {
         if (nextProps && nextProps.login && nextProps.login.token) {
-            LocalStorage.setItem('user', nextProps.login.user);
-            LocalStorage.setItem('token', nextProps.login.token);
+            Authentication.saveCredentials(nextProps.login.user, nextProps.login.token);
             browserHistory.push('/home');
         }
     }
