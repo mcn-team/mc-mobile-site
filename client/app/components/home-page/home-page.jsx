@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import HomeMenu from './home-menu';
-import { LocalStorage } from '../../utils/browser-storages';
+import { Authentication } from '../../utils/authentication-helper';
 
 export default class HomePage extends React.Component {
     constructor(props) {
@@ -11,8 +11,8 @@ export default class HomePage extends React.Component {
     }
 
     componentWillMount() {
-        if (!LocalStorage.getItem('user') || !LocalStorage.getItem('token')) {
-            LocalStorage.dropCredentials();
+        if (!Authentication.isUserLoggedIn()) {
+            Authentication.dropCredentials();
             browserHistory.push('/');
         }
     }

@@ -12,11 +12,6 @@ export class LocalStorage {
     static removeItem(key) {
         localStorage.removeItem(STORAGE_PREFIX_KEY + key);
     }
-    
-    static dropCredentials() {
-        LocalStorage.removeItem('user');
-        LocalStorage.removeItem('token');
-    }
 }
 
 export class SessionStorage {
