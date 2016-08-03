@@ -9,6 +9,13 @@ export default class HeaderComponent extends React.Component {
         }
     }
 
+    static get propTypes() {
+        return {
+            title: React.PropTypes.string,
+            subtitle: React.PropTypes.string
+        };
+    }
+
     render() {
         return (
             <section className="column is-12 has-text-centered spacer">
