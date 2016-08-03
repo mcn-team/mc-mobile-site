@@ -1,10 +1,16 @@
 import React from 'react';
+import { connect as Connect } from 'react-redux';
 
 import HeaderComponent from '../commons/header';
+import { fetchCollectionAction } from './actions';
 
-export default class CollectionsListPage extends React.Component {
+class CollectionsListPageComponent extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(fetchCollectionAction());
     }
 
     render() {
@@ -15,3 +21,12 @@ export default class CollectionsListPage extends React.Component {
         );
     }
 }
+
+const mapStateToProps = ({ collections }) => {
+    return {
+        collections: collections
+    };
+};
+
+const CollectionsListPage = Connect(mapStateToProps)(CollectionsListPageComponent);
+export default CollectionsListPage;
