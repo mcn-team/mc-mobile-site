@@ -1,6 +1,7 @@
 import { HttpClient } from 'aurelia-fetch-client';
 
 import { Authentication } from '../../utils/authentication-helper';
+import { Config } from '../../config/config';
 
 export const FETCH_DETAILS_START_TYPE = 'FETCH_DETAILS_START';
 export const FETCH_DETAILS_SUCCESS_TYPE = 'FETCH_DETAILS_SUCCESS';
@@ -34,7 +35,7 @@ export const fetchDetailsAction = (collectionName) => {
             }
         };
 
-        return httpClient.fetch('http://dev.kaze-d.fr/api/books/collections/' + collectionName + '/list', options)
+        return httpClient.fetch(Config.baseUrl + '/api/books/collections/' + collectionName + '/list', options)
             .then((response) => {
                 if (response.ok) {
                     return { data: response.json() };

@@ -8,6 +8,7 @@ const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const _ = require('lodash');
 const inject = require('gulp-inject');
+const rimraf = require('rimraf');
 
 const JS_FILES = [
     'client/app/**/*.js'
@@ -76,3 +77,11 @@ gulp.task('watch', ['browsersync'], () => {
 });
 
 gulp.task('serve', ['watch']);
+
+gulp.task('clean', () => {
+    rimraf('./client/dist/');
+});
+
+gulp.task('build', ['clean'], () => {
+    gulp.run('bundle');
+});
