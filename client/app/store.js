@@ -46,7 +46,9 @@ const collections = (state = defaultCollectionState, action) => {
     }
 };
 
-const details = (state = {}, action) => {
+const defaultDetailsState = { response: [] };
+
+const details = (state = defaultDetailsState, action) => {
     switch (action.type) {
         case FETCH_DETAILS_START_TYPE:
             return Object.assign({}, state, { fetching: true });

@@ -49,7 +49,9 @@ export const fetchDetailsAction = (collectionName) => {
                     });
                 } else {
                     response.data.then((parsedResponse) => {
-                        dispatch(fetchDetailsSuccessAction(parsedResponse));
+                        dispatch(fetchDetailsSuccessAction(parsedResponse.sort((a, b) => {
+                            return a.volume - b.volume;
+                        })));
                     });
                 }
 

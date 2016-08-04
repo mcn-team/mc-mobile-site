@@ -12,6 +12,7 @@ body {
 
 /* OVERRIDING BULMA STYLE */
 button.linear-grey,
+#missing-list > .media-element,
 .box {
   background: linear-gradient(#484e55, #3a3f44 60%, #313539) no-repeat;
   color: #ddd;

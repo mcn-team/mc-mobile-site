@@ -4,11 +4,11 @@ import { connect as Connect } from 'react-redux';
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
 import { fetchDetailsAction } from './details-actions';
+import MissingList from './missing-list';
 
 class DetailsPageComponent extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this);
     }
 
     componentWillMount() {
@@ -24,19 +24,19 @@ class DetailsPageComponent extends React.Component {
         }
     }
 
-    componentWillUpdate(nextProps) {
-        console.log(nextProps);
-    }
-
     render() {
         return (
             <section>
                 <HeaderComponent title="Media Collection" subtitle={this.props.collectionName} />
+                <MissingList list={this.props.details.response} />
             </section>
         );
     }
 }
 
+/**
+ * Params from ownProps to allow easy access to route parameters
+ */
 const mapStateToProps = ({ details }, { params }) => {
     return {
         details: details,
