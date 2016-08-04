@@ -10,10 +10,6 @@ const FETCH_COLLECTIONS_START = {
     type: FETCH_COLLECTIONS_START_TYPE
 };
 
-const FETCH_COLLECTIONS_SUCCESS = {
-    type: FETCH_COLLECTIONS_SUCCESS_TYPE
-};
-
 const fetchCollectionsFailAction = (errorResponse) => {
     return {
         type: FETCH_COLLECTIONS_FAIL_TYPE,
