@@ -29,6 +29,7 @@
     "gulp-clean-css": "2.0.12",
     "gulp-dest": "0.2.3",
     "gulp-inject": "4.1.0",
+    "rimraf": "2.5.4",
     "webpack": "1.13.1",
     "webpack-stream": "3.2.0"
   },
