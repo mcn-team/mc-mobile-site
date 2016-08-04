@@ -4,6 +4,7 @@
 # Local resources
 node_modules/
 client/dist/
+*.tar
 
 # Logs
 *.log

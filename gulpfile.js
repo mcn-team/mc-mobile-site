@@ -8,6 +8,7 @@ const webpackStream = require('webpack-stream');
 const webpack = require('webpack');
 const _ = require('lodash');
 const inject = require('gulp-inject');
+const rimraf = require('rimraf');
 
 const JS_FILES = [
     'client/app/**/*.js'
@@ -32,22 +33,22 @@ const ASSETS_FILES = [
     'client/app/assets/**/*.*'
 ];
 
-gulp.task('assets', () => {
+gulp.task('assets', ['clean'], () => {
     return gulp.src(ASSETS_FILES)
         .pipe(gulp.dest('client/dist/'));
 });
 
-gulp.task('libs', () => {
+gulp.task('libs', ['styles'], () => {
     return gulp.src(LIB_FILES)
         .pipe(gulp.dest('client/dist/libs/'));
 });
 
-gulp.task('styles', () => {
+gulp.task('styles', ['assets'], () => {
     return gulp.src(CSS_FILES)
         .pipe(gulp.dest('client/dist/css/'));
 });
 
-gulp.task('bundle', ['styles', 'libs', 'assets'], () => {
+gulp.task('bundle', ['libs'], () => {
     return gulp.src('./entry.js')
         .pipe(webpackStream(require('./webpack.config.js'), webpack))
         .pipe(gulp.dest('client/dist/'));
@@ -76,3 +77,9 @@ gulp.task('watch', ['browsersync'], () => {
 });
 
 gulp.task('serve', ['watch']);
+
+gulp.task('clean', () => {
+    rimraf('./client/dist/', () => {});
+});
+
+gulp.task('build', ['bundle']);

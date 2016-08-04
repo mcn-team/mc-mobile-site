@@ -1,4 +1,5 @@
 import { HttpClient, json as Json } from 'aurelia-fetch-client';
+import { Config } from '../../config/config';
 
 export const LOGIN_START_TYPE = 'LOGIN_START';
 export const LOGIN_SUCCESS_TYPE = 'LOGIN_SUCCESS';
@@ -52,7 +53,7 @@ const loginCall = (dispatch, username, password, publicKey) => {
         method: 'POST',
         body: Json({ username: username, password: encryptedPassword })
     };
-    httpClient.fetch('http://dev.kaze-d.fr/api/users/login', options)
+    httpClient.fetch(Config.baseUrl + '/api/users/login', options)
         .then((response) => {
             if (response.ok) {
                 return { data: response.json() };
@@ -85,7 +86,7 @@ export const loginAction = (username, password) => {
         dispatch(LOGIN_START);
 
         const options = { method: 'GET' };
-        return httpClient.fetch('http://dev.kaze-d.fr/api/auth/key', options)
+        return httpClient.fetch(Config.baseUrl + '/api/auth/key', options)
             .then((response) => {
                 if (response.ok) {
                     return { data: response.json() };
