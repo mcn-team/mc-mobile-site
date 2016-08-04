@@ -14,7 +14,7 @@ Render(
             <IndexRoute component={LoginPage} />
             <Route path="home" component={HomePage} />
             <Route path="collections" component={CollectionListPage}/>
-            <Route path="details" component={DetailsPage} />
+            <Route path="/details/:collectionName" component={DetailsPage} />
         </Route>
     </Router>,
     document.getElementById('app')

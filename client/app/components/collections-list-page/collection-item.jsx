@@ -15,10 +15,16 @@ export class CollectionItem extends React.Component {
     render() {
         return (
             <div className="box mini text-important">
-                <Link to={{ pathname: '/details', query: { collectionName: this.props.title }}}>
+                <Link to={ `/details/${this.props.title}` }>
                     {this.props.title}
                 </Link>
             </div>
         );
     }
 }
+/*
+ <Link to={{ pathname: '/details', query: { collectionName: this.props.title }}}>
+ {this.props.title}
+ </Link>
+
+ */

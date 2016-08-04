@@ -8,6 +8,7 @@ import { fetchDetailsAction } from './details-actions';
 class DetailsPageComponent extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this);
     }
 
     componentWillMount() {
@@ -19,7 +20,7 @@ class DetailsPageComponent extends React.Component {
 
     componentDidMount() {
         if (Authentication.isUserLoggedIn()) {
-            this.props.dispatch(fetchDetailsAction(this.props.location.query.collectionName));
+            this.props.dispatch(fetchDetailsAction(this.props.collectionName));
         }
     }
 
@@ -30,15 +31,16 @@ class DetailsPageComponent extends React.Component {
     render() {
         return (
             <section>
-                <HeaderComponent title="Media Collection" subtitle={this.props.location.query.collectionName} />
+                <HeaderComponent title="Media Collection" subtitle={this.props.collectionName} />
             </section>
         );
     }
 }
 
-const mapStateToProps = ({ details }) => {
+const mapStateToProps = ({ details }, { params }) => {
     return {
-        details: details
+        details: details,
+        collectionName: params.collectionName
     };
 };
 
