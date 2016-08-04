@@ -1,4 +1,4 @@
-const baseUrl = 'http://dev.kaze-d.fr';
+const baseUrl = 'http://m.dev.kaze-d.fr';
 
 export class Config {
     static get baseUrl() {
