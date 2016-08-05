@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { HttpClient } from 'aurelia-fetch-client';
 
 import { Authentication } from '../../utils/authentication-helper';
