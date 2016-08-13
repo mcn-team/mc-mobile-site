@@ -33,7 +33,7 @@ const ASSETS_FILES = [
     'client/app/assets/**/*.*'
 ];
 
-gulp.task('assets', ['clean'], () => {
+gulp.task('assets', [], () => {
     return gulp.src(ASSETS_FILES)
         .pipe(gulp.dest('client/dist/'));
 });
@@ -76,10 +76,10 @@ gulp.task('watch', ['browsersync'], () => {
     gulp.watch(CSS_FILES, ['styles']);
 });
 
-gulp.task('serve', ['watch']);
+gulp.task('serve', ['clean', 'watch']);
 
 gulp.task('clean', () => {
     rimraf('./client/dist/', () => {});
 });
 
-gulp.task('build', ['bundle']);
+gulp.task('build', ['clean','bundle']);
