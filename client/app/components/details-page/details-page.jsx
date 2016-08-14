@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
-import { fetchDetailsAction } from './details-actions';
+import { fetchDetailsAction, resetDetailsAction } from './details-actions';
 import MissingList from './missing-list';
 
 class DetailsPageComponent extends React.Component {
@@ -23,6 +23,10 @@ class DetailsPageComponent extends React.Component {
         if (Authentication.isUserLoggedIn()) {
             this.props.dispatch(fetchDetailsAction(this.props.collectionName));
         }
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch(resetDetailsAction);
     }
 
     render() {
