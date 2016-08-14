@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
