@@ -30,7 +30,7 @@ export default class MissingList extends React.Component {
 
         if (media) {
             return (
-                <LastMedia title={media.title} volume={media.volume} publisher={media.publisher}/>
+                <LastMedia title={media.title} volume={parseInt(media.volume)} publisher={media.publisher}/>
             );
         } else {
             return (
@@ -56,6 +56,7 @@ export default class MissingList extends React.Component {
 
                 while (volume < lastVolume) {
                     const media = _.filter(this.props.list, { volume: volume });
+
                     if (media.length === 0 || media[0].bought === false) {
                         missing.push(volume);
                     }
