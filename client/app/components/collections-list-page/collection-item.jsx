@@ -8,13 +8,14 @@ export class CollectionItem extends React.Component {
 
     static get propTypes() {
         return {
-            title: React.PropTypes.string
+            title: React.PropTypes.string,
+            hidden: React.PropTypes.bool
         };
     }
 
     render() {
         return (
-            <div className="box mini text-important">
+            <div className={ "box mini text-important" + (this.props.hidden ? " hidden" : "") + (this.props.completed ? " passive" : "") }>
                 <Link to={ `/details/${this.props.title}` }>
                     {this.props.title}
                 </Link>
