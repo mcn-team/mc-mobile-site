@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { HttpClient, json as Json } from 'aurelia-fetch-client';
 import { Config } from '../../config/config';
 

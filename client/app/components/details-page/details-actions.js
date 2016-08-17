@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { HttpClient } from 'aurelia-fetch-client';
 
 import { Authentication } from '../../utils/authentication-helper';
@@ -6,6 +7,7 @@ import { Config } from '../../config/config';
 export const FETCH_DETAILS_START_TYPE = 'FETCH_DETAILS_START';
 export const FETCH_DETAILS_SUCCESS_TYPE = 'FETCH_DETAILS_SUCCESS';
 export const FETCH_DETAILS_FAIL_TYPE = 'FETCH_DETAILS_FAIL';
+export const FETCH_DETAILS_RESET_TYPE = 'FETCH_DETAILS_RESET';
 
 const FETCH_DETAILS_START = { type: FETCH_DETAILS_START_TYPE };
 
@@ -59,3 +61,5 @@ export const fetchDetailsAction = (collectionName) => {
             });
     };
 };
+
+export const resetDetailsAction = { type: FETCH_DETAILS_RESET_TYPE };

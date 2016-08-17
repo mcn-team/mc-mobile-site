@@ -11,6 +11,7 @@ body {
 }
 
 /* OVERRIDING BULMA STYLE */
+.button:hover, .button:focus, .button.is-active { color: #c8c8c8; }
 button.linear-grey,
 #missing-list .media-element,
 .box {
@@ -25,6 +26,7 @@ button.linear-grey,
 
 .subtitle { color: #cccccc; }
 
+.passive a,
 .label { color: #c8c8c8; }
 
 .help.larger { font-size: 14px; }
@@ -56,3 +58,5 @@ a:hover { color: #63c55f; }
 :-ms-input-placeholder { color:#444; }
 
 input:-moz-placeholder { color:#444; }
+
+.hidden { display: none; }
