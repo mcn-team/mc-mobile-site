@@ -60,3 +60,5 @@ a:hover { color: #63c55f; }
 input:-moz-placeholder { color:#444; }
 
 .hidden { display: none; }
+
+#scan > video { width: 100%; }

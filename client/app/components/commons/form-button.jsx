@@ -17,7 +17,7 @@ export default class FormButtonComponent extends React.Component {
 
     static get propTypes() {
         return {
-            size: React.PropTypes.oneOf(['small', 'normal', 'medium', 'large']),
+            size: React.PropTypes.oneOf(['small', 'normal', 'medium', 'large']).isRequired,
             type: React.PropTypes.oneOf(['submit', 'button', 'reset']),
             text: React.PropTypes.string,
             action: React.PropTypes.func
@@ -31,7 +31,7 @@ export default class FormButtonComponent extends React.Component {
 
     render() {
         return (
-            <p className="control">
+            <p className={this.props.type === 'button' ? '' : 'control'}>
                 <button
                     className={"button linear-grey" + this.sizeClass || ''}
                     type={this.props.type}
