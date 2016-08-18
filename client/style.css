@@ -61,4 +61,8 @@ input:-moz-placeholder { color:#444; }
 
 .hidden { display: none; }
 
-#scan > video { width: 100%; }
+#scan > video {
+  width: 100vw;
+}
+
+#scan > canvas { display: none; }

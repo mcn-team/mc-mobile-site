@@ -4,6 +4,8 @@ import thunkMiddleware from 'redux-thunk';
 import login from './components/login-page/login-reducers';
 import collections from './components/collections-list-page/collections-reducers';
 import details from './components/details-page/details-reducers';
+import scan from './components/add-book-page/scan-reducers';
+import bookData from './components/add-book-page/add-book-reducers';
 
 /**
  * Actions type imports
@@ -13,7 +15,9 @@ import details from './components/details-page/details-reducers';
 const appReducers = combineReducers({
     login,
     collections,
-    details
+    details,
+    scan,
+    bookData
 });
 
 const Store = createStore(appReducers, applyMiddleware(thunkMiddleware));
