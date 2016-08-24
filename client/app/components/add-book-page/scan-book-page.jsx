@@ -6,9 +6,9 @@ import Quagga from 'quagga';
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
 import { scanCompletedAction, scanFailedAction } from './scan-actions';
-import { fetchBookDataAction } from './add-book-actions';
+import { fetchBookDataAction } from './scan-book-actions';
 
-class AddBookPageComponent extends React.Component {
+class ScanBookPageComponent extends React.Component {
     constructor(props) {
         super(props);
         this.quaggaInitialization.bind(this);
@@ -26,6 +26,10 @@ class AddBookPageComponent extends React.Component {
 
     componentDidMount() {
         this.quaggaInitialization();
+
+        //Mock scan
+        Quagga.stop();
+        this.props.dispatch(scanCompletedAction("9782253022626"));
     }
 
     componentDidUpdate() {
@@ -136,5 +140,5 @@ const mapStateToProps = ({ scan, bookData }) => {
     };
 };
 
-const AddBookPage = Connect(mapStateToProps)(AddBookPageComponent);
-export default AddBookPage;
+const ScanBookPage = Connect(mapStateToProps)(ScanBookPageComponent);
+export default ScanBookPage;

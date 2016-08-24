@@ -5,7 +5,7 @@ import login from './components/login-page/login-reducers';
 import collections from './components/collections-list-page/collections-reducers';
 import details from './components/details-page/details-reducers';
 import scan from './components/add-book-page/scan-reducers';
-import bookData from './components/add-book-page/add-book-reducers';
+import bookData from './components/add-book-page/scan-book-reducers';
 
 /**
  * Actions type imports

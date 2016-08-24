@@ -1,5 +1,5 @@
 import { FETCH_BOOK_DATA_FAIL_TYPE, FETCH_BOOK_DATA_START_TYPE, FETCH_BOOK_DATA_SUCCESS_TYPE }
-    from './add-book-actions';
+    from './scan-book-actions';
 
 const defaultBookDataState = { response: [] };
 
