@@ -7,7 +7,7 @@ import LoginPage from './components/login-page/login-page';
 import HomePage from './components/home-page/home-page';
 import CollectionListPage from './components/collections-list-page/collections-list-page';
 import DetailsPage from './components/details-page/details-page';
-import ScanBookPage from './components/add-book-page/scan-book-page';
+import ScanBookPage from './components/scan-book-page/scan-book-page';
 
 Render(
     <Router history={browserHistory}>

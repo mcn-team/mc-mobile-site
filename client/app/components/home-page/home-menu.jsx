@@ -18,8 +18,8 @@ export default class HomeMenu extends React.Component {
                     />
                     <HomeButton
                         icon="dist/img/add-icon.png"
-                        label="Add Book"
-                        path="/add"
+                        label="Scan Book"
+                        path="/scan"
                     />
                 </div>
             </div>

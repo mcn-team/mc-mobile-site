@@ -126,7 +126,7 @@ class ScanBookPageComponent extends React.Component {
         const scannedCode = this.props.scan.code;
         return (
             <section className="columns is-marginless">
-                <HeaderComponent title="Media Collection" subtitle="Add book" />
+                <HeaderComponent title="Media Collection" subtitle="Scan book" />
                 { scannedCode ? this.renderConfirm(scannedCode) : this.renderScanner() }
             </section>
         );
