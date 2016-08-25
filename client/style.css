@@ -36,8 +36,16 @@ button.linear-grey,
 .box:not(:last-child).mini { margin-bottom: 15px; }
 
 strong,
+select,
 a,
 a:hover { color: #63c55f; }
+
+select {
+  background: transparent;
+  height: 2em;
+  width: 100%;
+  border-color: #c8c8c8;
+}
 
 .is-disabled { opacity: 0.5 }
 
