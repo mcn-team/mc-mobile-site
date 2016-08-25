@@ -1,7 +1,5 @@
 import { FETCH_BOOK_DATA_FAIL_TYPE, FETCH_BOOK_DATA_START_TYPE, FETCH_BOOK_DATA_SUCCESS_TYPE }
-    from './scan-book-actions';
-
-const defaultBookDataState = { response: [] };
+    from './add-book-actions';
 
 const bookData = (state = {}, action) => {
     switch (action.type) {

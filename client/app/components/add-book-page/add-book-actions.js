@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 import { HttpClient } from 'aurelia-fetch-client';
-import _ from 'lodash';
 
 import { Authentication } from '../../utils/authentication-helper';
 import { Config } from '../../config/config';

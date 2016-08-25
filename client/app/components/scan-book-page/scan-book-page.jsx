@@ -6,7 +6,6 @@ import Quagga from 'quagga';
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
 import { scanCompletedAction, scanFailedAction } from './scan-actions';
-import { fetchBookDataAction } from './scan-book-actions';
 
 class ScanBookPageComponent extends React.Component {
     constructor(props) {
@@ -95,7 +94,7 @@ class ScanBookPageComponent extends React.Component {
                         <div className="column">
                             <button type="button" className="button linear-grey"
                                     onClick={() => {
-                                        this.props.dispatch(fetchBookDataAction(scannedCode));
+
                                     }}>
                                 OK
                             </button>
@@ -133,10 +132,9 @@ class ScanBookPageComponent extends React.Component {
     }
 }
 
-const mapStateToProps = ({ scan, bookData }) => {
+const mapStateToProps = ({ scan }) => {
     return {
-        scan: scan,
-        bookData: bookData
+        scan: scan
     };
 };
 

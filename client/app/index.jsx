@@ -8,6 +8,7 @@ import HomePage from './components/home-page/home-page';
 import CollectionListPage from './components/collections-list-page/collections-list-page';
 import DetailsPage from './components/details-page/details-page';
 import ScanBookPage from './components/scan-book-page/scan-book-page';
+import AddBookPage from './components/add-book-page/add-book-page';
 
 Render(
     <Router history={browserHistory}>
@@ -17,6 +18,7 @@ Render(
             <Route path="collections" component={CollectionListPage}/>
             <Route path="scan" component={ScanBookPage}/>
             <Route path="/details/:collectionName" component={DetailsPage} />
+            <Route path="/add/:isbn" component={AddBookPage}/>
         </Route>
     </Router>,
     document.getElementById('app')
