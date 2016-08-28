@@ -6,6 +6,7 @@ import Quagga from 'quagga';
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
 import { scanCompletedAction, scanFailedAction } from './scan-actions';
+import LinkButton from '../commons/link-button';
 
 class ScanBookPageComponent extends React.Component {
     constructor(props) {
@@ -13,7 +14,6 @@ class ScanBookPageComponent extends React.Component {
         this.quaggaInitialization.bind(this);
         this.renderConfirm.bind(this);
         this.renderScanner.bind(this);
-        // this.onRetryClick.bind(this);
     }
 
     componentWillMount() {
@@ -28,15 +28,13 @@ class ScanBookPageComponent extends React.Component {
 
         //Mock scan
         Quagga.stop();
-        this.props.dispatch(scanCompletedAction("9782253022626"));
+        this.props.dispatch(scanCompletedAction("9782811205218"));
     }
 
     componentDidUpdate() {
         if (!this.props.scan.code) {
             this.quaggaInitialization();
         }
-
-        console.log(this.props.bookData);
     }
 
     quaggaInitialization() {
@@ -76,11 +74,6 @@ class ScanBookPageComponent extends React.Component {
         });
     }
 
-    // onRetryClick() {
-    //     this.props.dispatch(scanFailedAction());
-    //     Not Working... why ?
-    // }
-
     renderConfirm(scannedCode) {
         function insert(str, index, value) {
             return str.substr(0, index) + value + str.substr(index);
@@ -92,12 +85,10 @@ class ScanBookPageComponent extends React.Component {
                 <span>{ insert(insert(scannedCode, 1, ' '), 8, ' ') }</span>
                     <div className="columns is-marginless is-mobile">
                         <div className="column">
-                            <button type="button" className="button linear-grey"
-                                    onClick={() => {
-
-                                    }}>
-                                OK
-                            </button>
+                            <LinkButton
+                                path={'/add/' + scannedCode}
+                                label="OK"
+                            />
                         </div>
                         <div className="column">
                             <button type="button" className="button linear-grey"
