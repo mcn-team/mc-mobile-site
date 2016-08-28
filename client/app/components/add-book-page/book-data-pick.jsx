@@ -15,7 +15,8 @@ export default class BookDataPick extends React.Component {
             author: this.props.bookData.author,
             pages: this.props.bookData.pages,
             publisher: this.props.bookData.publisher,
-            cover: this.props.bookData.cover
+            cover: this.props.bookData.cover,
+            isbn: this.props.isbn
         };
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onCollectionChange = this.onCollectionChange.bind(this);

@@ -61,7 +61,7 @@ class ScanBookPageComponent extends React.Component {
             locate: true
         }, (err) => {
             if (err) {
-                console.log(err);
+                console.error(err);
                 return;
             }
 

@@ -27,7 +27,7 @@ class AddBookPageComponent extends React.Component {
         return (
             <section className="columns is-marginless">
                 <HeaderComponent title="Media Collection" subtitle="Add book" />
-                { this.props.book.response && <BookDataPick bookData={this.props.book.response} dispatch={(action) => {
+                { this.props.book.response && <BookDataPick bookData={this.props.book.response} isbn={this.props.isbn} dispatch={(action) => {
                     this.props.dispatch(action);
                 }} /> }
             </section>
