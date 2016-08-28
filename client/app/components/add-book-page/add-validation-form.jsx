@@ -13,6 +13,9 @@ export default class AddValidationForm extends React.Component {
             <section className="spacer">
                 <form className="has-control-centered has-text-centered">
                     <div className="columns is-marginless">
+                        <div className="column is-6-mobile is-offset-3-mobile">
+                            <img src={this.props.book && this.props.book.cover} alt="cover"/>
+                        </div>
                         <div className="column is-10-mobile is-offset-1-mobile">
                             <FormInputComponent
                                 type="text"

@@ -17,6 +17,7 @@ class AddValidationPageComponent extends React.Component {
             browserHistory.push('/');
         }
 
+        console.log(this.props.book);
         if (Object.keys(this.props.book).length === 0) {
             browserHistory.push('/');
         }

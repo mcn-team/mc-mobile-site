@@ -23,6 +23,10 @@ export default class BookDataPick extends React.Component {
         this.onPriceChange = this.onPriceChange.bind(this);
     }
 
+    componentDidMount() {
+        this.dispatchPickedData();
+    }
+
     static get propTypes() {
         return {
             bookData: React.PropTypes.object.isRequired
