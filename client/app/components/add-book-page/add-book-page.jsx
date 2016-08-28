@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import { fetchBookDataAction } from './add-book-actions';
 import BookDataPick from './book-data-pick';
+import { Authentication } from '../../utils/authentication-helper';
 
 class AddBookPageComponent extends React.Component {
     constructor(props) {
@@ -14,7 +16,11 @@ class AddBookPageComponent extends React.Component {
         this.props.dispatch(fetchBookDataAction(this.props.isbn));
     }
 
-    componentDidUpdate() {
+    componentWillMount() {
+        if (!Authentication.isUserLoggedIn()) {
+            Authentication.dropCredentials();
+            browserHistory.push('/');
+        }
     }
 
     render() {

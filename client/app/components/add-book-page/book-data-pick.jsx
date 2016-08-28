@@ -11,7 +11,11 @@ export default class BookDataPick extends React.Component {
             title: this.props.bookData.title && this.props.bookData.title[0],
             collection: this.props.bookData.title && this.props.bookData.title[0],
             volume: this.props.bookData.volume && this.props.bookData.volume[0],
-            price: this.props.bookData.price && this.props.bookData.price[0]
+            price: this.props.bookData.price && this.props.bookData.price[0],
+            author: this.props.bookData.author,
+            pages: this.props.bookData.pages,
+            publisher: this.props.bookData.publisher,
+            cover: this.props.bookData.cover
         };
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onCollectionChange = this.onCollectionChange.bind(this);
@@ -26,12 +30,12 @@ export default class BookDataPick extends React.Component {
     }
 
     onTitleChange(event) {
-        this.pickedData.title = event.target.value;
+        this.pickedData.title = event.target.value.trim();
         this.dispatchPickedData()
     }
 
     onCollectionChange(event) {
-        this.pickedData.collection = event.target.value;
+        this.pickedData.collection = event.target.value.trim();
         this.dispatchPickedData()
     }
 

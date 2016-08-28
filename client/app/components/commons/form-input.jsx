@@ -3,7 +3,7 @@ import React from 'react';
 export default class FormInputComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { value: '' };
+        this.state = { value: this.props.content || '' };
         this.inputChangeHandler = this.inputChangeHandler.bind(this);
     }
 
