@@ -6,6 +6,7 @@ import collections from './components/collections-list-page/collections-reducers
 import details from './components/details-page/details-reducers';
 import scan from './components/scan-book-page/scan-reducers';
 import bookData from './components/add-book-page/add-book-reducers';
+import pickedData from './components/add-book-page/add-validation-reducers';
 
 /**
  * Actions type imports
@@ -16,7 +17,8 @@ const appReducers = combineReducers({
     collections,
     details,
     scan,
-    bookData
+    bookData,
+    pickedData
 });
 
 const Store = createStore(appReducers, applyMiddleware(thunkMiddleware));

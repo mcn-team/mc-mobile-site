@@ -22,7 +22,11 @@ export default class ComboBoxComponent extends React.Component {
         return (
             <div className={'control has-text-centered' + this.columnsClasses[this.props.size] }>
                 <label className="label" >{this.props.label}</label>
-                <select name={this.props.label.toLocaleLowerCase()} id={this.props.label.toLocaleLowerCase()}>
+                <select
+                    name={this.props.label.toLocaleLowerCase()}
+                    id={this.props.label.toLocaleLowerCase()}
+                    onChange={this.props.onChange}
+                >
                     {this.props.content.map((element, index) => {
                         return (
                             <option value={element} key={index}>{element}</option>

@@ -2,10 +2,21 @@ import React from 'react';
 
 import ComboBoxComponent from '../commons/combo-box-component';
 import LinkButton from '../commons/link-button';
+import { updatePickedData } from './add-validation-actions';
 
 export default class BookDataPick extends React.Component {
     constructor(props) {
         super(props);
+        this.pickedData = {
+            title: this.props.bookData.title && this.props.bookData.title[0],
+            collection: this.props.bookData.title && this.props.bookData.title[0],
+            volume: this.props.bookData.volume && this.props.bookData.volume[0],
+            price: this.props.bookData.price && this.props.bookData.price[0]
+        };
+        this.onTitleChange = this.onTitleChange.bind(this);
+        this.onCollectionChange = this.onCollectionChange.bind(this);
+        this.onVolumeChange = this.onVolumeChange.bind(this);
+        this.onPriceChange = this.onPriceChange.bind(this);
     }
 
     static get propTypes() {
@@ -14,18 +25,42 @@ export default class BookDataPick extends React.Component {
         };
     }
 
+    onTitleChange(event) {
+        this.pickedData.title = event.target.value;
+        this.dispatchPickedData()
+    }
+
+    onCollectionChange(event) {
+        this.pickedData.collection = event.target.value;
+        this.dispatchPickedData()
+    }
+
+    onVolumeChange(event) {
+        this.pickedData.volume = event.target.value;
+        this.dispatchPickedData()
+    }
+
+    onPriceChange(event) {
+        this.pickedData.price = event.target.value;
+        this.dispatchPickedData()
+    }
+
+    dispatchPickedData() {
+        this.props.dispatch(updatePickedData(this.pickedData));
+    }
+
     render() {
         return (
             <section className="spacer has-control-centered columns">
-                <ComboBoxComponent size="large" label="Title" content={this.props.bookData.title} />
-                <ComboBoxComponent size="large" label="Collection" content={this.props.bookData.title} />
-                <ComboBoxComponent size="small" label="Volume" content={this.props.bookData.volume} />
-                <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} />
+                <ComboBoxComponent size="large" label="Title" content={this.props.bookData.title} onChange={this.onTitleChange} />
+                <ComboBoxComponent size="large" label="Collection" content={this.props.bookData.title} onChange={this.onCollectionChange} />
+                <ComboBoxComponent size="small" label="Volume" content={this.props.bookData.volume} onChange={this.onVolumeChange} />
+                <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} onChange={this.onPriceChange} />
                 <div className="columns is-marginless is-mobile has-text-centered">
                     <div className="column">
                         <LinkButton
                             label="NEXT"
-                            path="/add/validation"
+                            path="/validation"
                         />
                     </div>
                     <div className="column">

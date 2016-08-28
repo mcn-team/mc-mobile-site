@@ -53,9 +53,6 @@ export const fetchBookDataAction = (code) => {
                     });
                 } else {
                     response.data.then((parsedResponse) => {
-
-                        console.log(parsedResponse);
-
                         dispatch(fetchBookDataSuccessAction(parsedResponse));
                     });
                 }

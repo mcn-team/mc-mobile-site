@@ -9,6 +9,7 @@ import CollectionListPage from './components/collections-list-page/collections-l
 import DetailsPage from './components/details-page/details-page';
 import ScanBookPage from './components/scan-book-page/scan-book-page';
 import AddBookPage from './components/add-book-page/add-book-page';
+import AddValidationPage from './components/add-book-page/add-validation-page';
 
 Render(
     <Router history={browserHistory}>
@@ -19,6 +20,7 @@ Render(
             <Route path="scan" component={ScanBookPage}/>
             <Route path="/details/:collectionName" component={DetailsPage} />
             <Route path="/add/:isbn" component={AddBookPage}/>
+            <Route path="/validation" component={AddValidationPage}/>
         </Route>
     </Router>,
     document.getElementById('app')
