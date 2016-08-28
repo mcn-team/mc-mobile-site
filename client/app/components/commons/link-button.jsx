@@ -16,7 +16,7 @@ export default class LinkButton extends React.Component {
 
     render() {
         return (
-            <button type="button" className={'button linear-grey ' + (this.props.isDisabled ? ' is-disabled' : '')}>
+            <button type="button" className={'link-button button linear-grey ' + (this.props.isDisabled ? ' is-disabled' : '')}>
                 <Link to={this.props.path}>
                     <p>{this.props.label}</p>
                 </Link>

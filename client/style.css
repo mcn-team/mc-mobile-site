@@ -22,7 +22,7 @@ button.linear-grey,
 
 .control > input { background-color: #ddd }
 
-.title { color: #dddddd; }
+.title, .link-button a { color: #dddddd; }
 
 .subtitle { color: #cccccc; }
 
@@ -38,6 +38,7 @@ button.linear-grey,
 strong,
 select,
 a,
+button,
 a:hover { color: #63c55f; }
 
 select {
