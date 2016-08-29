@@ -31,13 +31,13 @@ export default class FormButtonComponent extends React.Component {
 
     render() {
         return (
-            <p className={this.props.type === 'button' ? '' : 'control'}>
+            <div className={this.props.type === 'button' ? '' : 'control'}>
                 <button
                     className={"button linear-grey" + this.sizeClass || ''}
                     type={this.props.type}
                     onClick={this.onClick}
                 >{this.props.text}</button>
-            </p>
+            </div>
         );
     }
 }

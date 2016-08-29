@@ -1,18 +1,22 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import FormInputComponent from '../commons/form-input';
+import FormButtonComponent from '../commons/form-button';
+import { sendBookAction, PICKED_DATA_RESET } from './add-validation-actions';
 
 export default class AddValidationForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.sendBook = this.sendBook.bind(this);
+        this.resetComponent = this.resetComponent.bind(this);
     }
 
     sendBook(form) {
         const newBook = {};
 
-        newBook.author = [form.author.state.value];
+        newBook.authors = [form.author.state.value];
         newBook.cover = this.props.book.cover;
         newBook.title = form.title.state.value;
         newBook.collectionName = form.collection.state.value;
@@ -22,10 +26,24 @@ export default class AddValidationForm extends React.Component {
         newBook.volume = form.volume.state.value;
         newBook.isbn = this.props.book.isbn;
         newBook.type = 'book';
+
+        this.props.dispatch(sendBookAction(newBook));
+    }
+
+    componentDidUpdate() {
+        if (this.props.book.success) {
+            this.resetComponent();
+        }
+    }
+
+    resetComponent() {
+        this.props.dispatch(PICKED_DATA_RESET);
+        browserHistory.push('/home');
     }
 
     render() {
         const form = {};
+
         return (
             <section className="spacer">
                 <form className="has-control-centered has-text-centered">
@@ -90,6 +108,28 @@ export default class AddValidationForm extends React.Component {
                                     return form.price = node;
                                 }}
                             />
+                            <div className="columns is-marginless is-mobile has-text-centered">
+                                <div className="column has-control-centered">
+                                    <FormButtonComponent
+                                        size="normal"
+                                        text="SEND"
+                                        type="submit"
+                                        action={() => {
+                                            this.sendBook(form);
+                                        }}
+                                    />
+                                </div>
+                                <div className="column has-control-centered">
+                                    <FormButtonComponent
+                                        size="normal"
+                                        text="QUIT"
+                                        type="reset"
+                                        action={() => {
+                                            this.resetComponent();
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>

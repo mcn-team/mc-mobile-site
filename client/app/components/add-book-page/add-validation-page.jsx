@@ -26,7 +26,9 @@ class AddValidationPageComponent extends React.Component {
         return (
             <section className="columns is-marginless">
                 <HeaderComponent title="Media Collection" subtitle="Validate book"/>
-                <AddValidationForm book={this.props.book.data}/>
+                <AddValidationForm book={this.props.book.data} dispatch={(action) => {
+                    this.props.dispatch(action);
+                }}/>
             </section>
         );
     }
