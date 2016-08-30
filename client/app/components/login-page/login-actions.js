@@ -6,11 +6,6 @@ export const LOGIN_START_TYPE = 'LOGIN_START';
 export const LOGIN_SUCCESS_TYPE = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL_TYPE = 'LOGIN_FAIL';
 
-/**
- * Message is mocked until Media Collection gets a fix in v0.2.2
- */
-const MOCKED_ERROR_MESSAGE = 'Wrong credentials';
-
 const LOGIN_SUCCESS = {
     type: LOGIN_SUCCESS_TYPE
 };
@@ -37,8 +32,7 @@ const loginFailure = (response) => {
     return {
         type: LOGIN_FAIL_TYPE,
         status: 'error',
-        message: MOCKED_ERROR_MESSAGE,
-        response: response
+        message: response
     };
 };
 
@@ -68,11 +62,6 @@ const loginCall = (dispatch, username, password, publicKey) => {
                     .then((json) => {
                         dispatch(loginFailure(json.message));
                     })
-                    // Fix to resolve the string response of the server
-                    // TODO: remove it after MC 0.2.2 is released
-                    .catch((json) => {
-                        dispatch(loginFailure(json.message));
-                    });
             } else {
                 response.data.then((json) => {
                     dispatch(loginSuccess(json));
