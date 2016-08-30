@@ -52,6 +52,7 @@ select {
 
 /* APP STYLE */
 .spacer { margin-top: 10%; }
+.spacer-large { margin-top: 20%; }
 .mini-spacer { margin-top: 5%; }
 
 #collections .box { word-wrap: break-word; }
