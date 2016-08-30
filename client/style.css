@@ -22,7 +22,7 @@ button.linear-grey,
 
 .control > input { background-color: #ddd }
 
-.title { color: #dddddd; }
+.title, .link-button a { color: #dddddd; }
 
 .subtitle { color: #cccccc; }
 
@@ -36,13 +36,23 @@ button.linear-grey,
 .box:not(:last-child).mini { margin-bottom: 15px; }
 
 strong,
+select,
 a,
+button,
 a:hover { color: #63c55f; }
+
+select {
+  background: transparent;
+  height: 2em;
+  width: 100%;
+  border-color: #c8c8c8;
+}
 
 .is-disabled { opacity: 0.5 }
 
 /* APP STYLE */
 .spacer { margin-top: 10%; }
+.spacer-large { margin-top: 20%; }
 .mini-spacer { margin-top: 5%; }
 
 #collections .box { word-wrap: break-word; }
@@ -60,3 +70,9 @@ a:hover { color: #63c55f; }
 input:-moz-placeholder { color:#444; }
 
 .hidden { display: none; }
+
+#scan > video {
+  width: 100vw;
+}
+
+#scan > canvas { display: none; }

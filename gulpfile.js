@@ -27,6 +27,7 @@ const BUNDLE_FILES = [
 ];
 const LIB_FILES = [
     'node_modules/js-md5/build/md5.min.js',
+    'node_modules/quagga/dist/quagga.min.js',
     'node_modules/jsencrypt/bin/jsencrypt.min.js'
 ];
 const ASSETS_FILES = [
