@@ -45,7 +45,9 @@ class LoginForm extends React.Component {
                         type="submit"
                         text="Sign in"
                         action={() => {
-                            this.props.dispatch(loginAction(form.username.state.value, form.password.state.value));
+                            if (form.username) {
+                                this.props.dispatch(loginAction(form.username.state.value, form.password.state.value));
+                            }
                         }}
                     />
                 </form>
