@@ -7,6 +7,7 @@ import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
 import { fetchDetailsAction, resetDetailsAction } from './details-actions';
 import MissingList from './missing-list';
+import Loader from '../commons/loader';
 
 class DetailsPageComponent extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class DetailsPageComponent extends React.Component {
 
     missingListRendering(collection) {
         if (this.props.details && this.props.details.fetching === true) {
-            return null;
+            return <Loader/>;
         }
         collection.sort(function (a, b) {
             return a.volume - b.volume;
