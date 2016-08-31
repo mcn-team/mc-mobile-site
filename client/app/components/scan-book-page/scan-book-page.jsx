@@ -27,8 +27,8 @@ class ScanBookPageComponent extends React.Component {
         this.quaggaInitialization();
 
         //Mock scan
-        Quagga.stop();
-        this.props.dispatch(scanCompletedAction("9782811205218"));
+        // Quagga.stop();
+        // this.props.dispatch(scanCompletedAction("9782811205218"));
     }
 
     componentDidUpdate() {
@@ -58,7 +58,7 @@ class ScanBookPageComponent extends React.Component {
                 patchSize: "large"
             },
             numOfWorkers: 4,
-            locate: true
+            locate: false
         }, (err) => {
             if (err) {
                 console.error(err);

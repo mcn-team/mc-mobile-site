@@ -4,9 +4,10 @@ import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import { fetchCollectionAction, DISPLAY_COLLECTION } from './collections-list-actions';
-import { CollectionItem } from './collection-item';
+import { CollectionList } from './collection-list';
 import { Authentication } from '../../utils/authentication-helper';
 import Loader from '../commons/loader';
+import SwitchButton from '../commons/switch-button';
 
 class CollectionsListPageComponent extends React.Component {
     constructor(props) {
@@ -42,23 +43,16 @@ class CollectionsListPageComponent extends React.Component {
         } else if (this.props.collections.response.length > 0) {
             component = (
                 <section>
-                    <div className="has-text-centered spacer">
-                        <button type="button" className="button linear-grey is-small" onClick={this.onClick}>
-                            { this.props.collections.showCompleted ? "Show unfinished" : "Show all" }
-                        </button>
-                    </div>
-                    <div className="spacer column is-10-mobile is-offset-1-mobile has-text-centered">
-                        { this.props.collections.response.map((element, index) => {
-                            return (
-                                <CollectionItem
-                                    hidden={!this.props.collections.showCompleted && !element.isMissing && element.isCompleted}
-                                    completed={!element.isMissing && element.isCompleted}
-                                    key={index}
-                                    title={element._id}
-                                />
-                            );
-                        }) }
-                    </div>
+                    <SwitchButton
+                        action={ this.onClick }
+                        switch={ this.props.collections.showCompleted}
+                        onText="Show unfinished"
+                        offText="Show all"
+                    />
+                    <CollectionList
+                        list={ this.props.collections.response }
+                        showCompleted={ this.props.collections.showCompleted }
+                    />
                 </section>);
         }
 
