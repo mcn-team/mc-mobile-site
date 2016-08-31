@@ -81,7 +81,9 @@ export const fetchCollectionAction = () => {
                             }
                         });
 
-                        dispatch(fetchCollectionsSuccessAction(parsedResponse));
+                        dispatch(fetchCollectionsSuccessAction(parsedResponse.sort((a, b) => {
+                            return a._id > b._id ? 1 : -1;
+                        })));
                     });
                 }
             });
