@@ -15,7 +15,7 @@ export class CollectionItem extends React.Component {
 
     render() {
         return (
-            <div className={ "box mini text-important" + (this.props.hidden ? " hidden" : "") + (this.props.completed ? " passive" : "") }>
+            <div className={ "box box-paddingless text-important" + (this.props.hidden ? " hidden" : "") + (this.props.completed ? " passive" : "") }>
                 <Link to={ `/details/${this.props.title}` }>
                     {this.props.title}
                 </Link>
