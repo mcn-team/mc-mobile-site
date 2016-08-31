@@ -37,7 +37,6 @@ class CollectionsListPageComponent extends React.Component {
     mainRendering() {
         let component = null;
 
-        console.log(this.props.collections);
         if (this.props.collections.fetching) {
             component = <Loader/>;
         } else if (this.props.collections.response.length > 0) {
