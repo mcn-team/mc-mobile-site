@@ -31,8 +31,6 @@ button.linear-grey,
 
 .help.larger { font-size: 14px; }
 
-.box.mini { padding: 10px; }
-
 .box:not(:last-child).mini { margin-bottom: 15px; }
 
 strong,
@@ -70,6 +68,13 @@ select {
 input:-moz-placeholder { color:#444; }
 
 .hidden { display: none; }
+
+.box.box-paddingless { padding: 0; }
+
+.box.box-paddingless > a {
+  display: block;
+  padding: 10px;
+}
 
 #scan > video {
   width: 100vw;
