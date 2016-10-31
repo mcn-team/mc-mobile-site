@@ -27,8 +27,8 @@ class ScanBookPageComponent extends React.Component {
         this.quaggaInitialization();
 
         //Mock scan
-        // Quagga.stop();
-        // this.props.dispatch(scanCompletedAction("9782811205218"));
+        Quagga.stop();
+        this.props.dispatch(scanCompletedAction("9782811217105"));
     }
 
     componentDidUpdate() {

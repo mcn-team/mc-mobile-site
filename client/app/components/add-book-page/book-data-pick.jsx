@@ -59,6 +59,7 @@ export default class BookDataPick extends React.Component {
     }
 
     render() {
+        console.log(this.props.bookData);
         return (
             <section className="spacer has-control-centered columns">
                 <ComboBoxComponent size="large" label="Title" content={this.props.bookData.title} onChange={this.onTitleChange} />
