@@ -18,11 +18,10 @@ export default class AddValidationForm extends React.Component {
         const newBook = {};
 
         newBook.authors = [form.author.state.value];
-        if (this.props.book.cover) {
+        if (this.props.book && this.props.book.cover) {
             newBook.cover = this.props.book.cover;
         }
         newBook.title = form.title.state.value;
-        newBook.collectionName = form.collection.state.value;
         if (form.pages.state.value) {
             newBook.pageCount = form.pages.state.value;
         }
@@ -32,7 +31,10 @@ export default class AddValidationForm extends React.Component {
         if (form.publisher.state.value) {
             newBook.publisher = form.publisher.state.value;
         }
-        newBook.volume = form.volume.state.value;
+        if (this.props.book && this.props.book.volume) {
+            newBook.volume = form.volume.state.value;
+            newBook.collectionName = form.collection.state.value;
+        }
         newBook.isbn = this.props.book.isbn;
         newBook.type = 'book';
 
@@ -61,6 +63,30 @@ export default class AddValidationForm extends React.Component {
 
     render() {
         const form = {};
+        let collectionFields = null;
+
+        if (this.props.book && this.props.book.volume) {
+            collectionFields = (
+                <div>
+                    <FormInputComponent
+                        type="text"
+                        label="Collection"
+                        content={this.props.book && this.props.book.collection}
+                        ref={(node) => {
+                            return form.collection = node;
+                        }}
+                    />
+                    <FormInputComponent
+                        type="number"
+                        label="Volume"
+                        content={this.props.book && this.props.book.volume}
+                        ref={(node) => {
+                            return form.volume = node;
+                        }}
+                    />
+                </div>
+            );
+        }
 
         return (
             <section className="spacer">
@@ -76,22 +102,7 @@ export default class AddValidationForm extends React.Component {
                                     return form.title = node;
                                 }}
                             />
-                            <FormInputComponent
-                                type="text"
-                                label="Collection"
-                                content={this.props.book && this.props.book.collection}
-                                ref={(node) => {
-                                    return form.collection = node;
-                                }}
-                            />
-                            <FormInputComponent
-                                type="number"
-                                label="Volume"
-                                content={this.props.book && this.props.book.volume}
-                                ref={(node) => {
-                                    return form.volume = node;
-                                }}
-                            />
+                            { collectionFields }
                             <FormInputComponent
                                 type="text"
                                 label="Author"

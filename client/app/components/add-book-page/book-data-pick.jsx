@@ -18,10 +18,15 @@ export default class BookDataPick extends React.Component {
             cover: this.props.bookData.cover,
             isbn: this.props.isbn
         };
+        if (this.props.bookData.volume === null) {
+            delete this.pickedData.collection;
+            delete this.pickedData.volume;
+        }
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onCollectionChange = this.onCollectionChange.bind(this);
         this.onVolumeChange = this.onVolumeChange.bind(this);
         this.onPriceChange = this.onPriceChange.bind(this);
+        this.renderCollectionFields = this.renderCollectionFields.bind(this);
     }
 
     componentDidMount() {
@@ -58,13 +63,22 @@ export default class BookDataPick extends React.Component {
         this.props.dispatch(updatePickedData(this.pickedData));
     }
 
+    renderCollectionFields() {
+        if (this.props.bookData.volume) {
+            return (
+                <div className="has-control-centered">
+                    <ComboBoxComponent size="large" label="Collection" content={this.props.bookData.title} onChange={this.onCollectionChange} />
+                    <ComboBoxComponent size="small" label="Volume" content={this.props.bookData.volume} onChange={this.onVolumeChange} />
+                </div>
+            );
+        }
+    }
+
     render() {
-        console.log(this.props.bookData);
         return (
             <section className="spacer has-control-centered columns">
                 <ComboBoxComponent size="large" label="Title" content={this.props.bookData.title} onChange={this.onTitleChange} />
-                <ComboBoxComponent size="large" label="Collection" content={this.props.bookData.title} onChange={this.onCollectionChange} />
-                <ComboBoxComponent size="small" label="Volume" content={this.props.bookData.volume} onChange={this.onVolumeChange} />
+                { this.renderCollectionFields() }
                 <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} onChange={this.onPriceChange} />
                 <div className="columns is-marginless is-mobile has-text-centered">
                     <div className="column">
