@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 
 import FormInputComponent from '../commons/form-input';
+import { CheckboxInputComponent } from '../commons/checkbox-input';
 import FormButtonComponent from '../commons/form-button';
 import { sendBookAction, PICKED_DATA_RESET } from './add-validation-actions';
 
@@ -35,10 +36,14 @@ export default class AddValidationForm extends React.Component {
             newBook.volume = form.volume.state.value;
             newBook.collectionName = form.collection.state.value;
         }
+
+        if (form.lastElement) {
+            newBook.lastElement = form.lastElement;
+        }
         newBook.isbn = this.props.book.isbn;
         newBook.type = 'book';
 
-        this.props.dispatch(sendBookAction(newBook));
+       this.props.dispatch(sendBookAction(newBook));
     }
 
     componentDidUpdate() {
@@ -83,6 +88,12 @@ export default class AddValidationForm extends React.Component {
                         ref={(node) => {
                             return form.volume = node;
                         }}
+                    />
+                    <CheckboxInputComponent
+                        label="Last Element"
+                        onChange={ (event) => {
+                            form.lastElement = event.target.checked;
+                        } }
                     />
                 </div>
             );
