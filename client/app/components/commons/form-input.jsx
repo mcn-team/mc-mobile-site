@@ -9,7 +9,7 @@ export default class FormInputComponent extends React.Component {
 
     static get propTypes() {
         return {
-            type: React.PropTypes.oneOf(['text', 'password', 'number', 'date', 'email', 'checkbox', 'radio']),
+            type: React.PropTypes.oneOf(['text', 'password', 'number', 'date', 'email']),
             label: React.PropTypes.string
         };
     }
@@ -25,7 +25,7 @@ export default class FormInputComponent extends React.Component {
                 <p className="control">
                     <input
                         className="input"
-                        id={this.props.label.toLocaleLowerCase()}
+                        id={this.props.label.toLocaleLowerCase().replace(' ', '_')}
                         type={this.props.type}
                         placeholder={this.props.label}
                         value={this.state.value}
