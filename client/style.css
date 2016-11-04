@@ -81,3 +81,13 @@ input:-moz-placeholder { color:#444; }
 }
 
 #scan > canvas { display: none; }
+.control label input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+}
+.control > label.checkbox > span {
+  vertical-align: super;
+  color: #c8c8c8;
+  margin-left: 10px;
+}
+.checkbox-center { top: 30px; }

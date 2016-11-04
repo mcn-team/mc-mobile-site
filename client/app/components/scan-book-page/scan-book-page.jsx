@@ -5,7 +5,7 @@ import Quagga from 'quagga';
 
 import HeaderComponent from '../commons/header';
 import { Authentication } from '../../utils/authentication-helper';
-import { scanCompletedAction, scanFailedAction } from './scan-actions';
+import { scanCompletedAction, scanFailedAction, scanResetAction } from './scan-actions';
 import LinkButton from '../commons/link-button';
 
 class ScanBookPageComponent extends React.Component {
@@ -27,8 +27,8 @@ class ScanBookPageComponent extends React.Component {
         this.quaggaInitialization();
 
         //Mock scan
-        // Quagga.stop();
-        // this.props.dispatch(scanCompletedAction("9782811205218"));
+        Quagga.stop();
+        this.props.dispatch(scanCompletedAction("9782811217105"));
     }
 
     componentDidUpdate() {
@@ -120,6 +120,10 @@ class ScanBookPageComponent extends React.Component {
                 { scannedCode ? this.renderConfirm(scannedCode) : this.renderScanner() }
             </section>
         );
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch(scanResetAction());
     }
 }
 

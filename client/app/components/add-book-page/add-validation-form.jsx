@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 
 import FormInputComponent from '../commons/form-input';
+import { CheckboxInputComponent } from '../commons/checkbox-input';
 import FormButtonComponent from '../commons/form-button';
 import { sendBookAction, PICKED_DATA_RESET } from './add-validation-actions';
 
@@ -11,29 +12,53 @@ export default class AddValidationForm extends React.Component {
 
         this.sendBook = this.sendBook.bind(this);
         this.resetComponent = this.resetComponent.bind(this);
+        this.renderCover = this.renderCover.bind(this);
     }
 
     sendBook(form) {
         const newBook = {};
 
         newBook.authors = [form.author.state.value];
-        newBook.cover = this.props.book.cover;
+        if (this.props.book && this.props.book.cover) {
+            newBook.cover = this.props.book.cover;
+        }
         newBook.title = form.title.state.value;
-        newBook.collectionName = form.collection.state.value;
-        newBook.publisher = form.publisher.state.value;
-        newBook.pageCount = form.pages.state.value;
-        newBook.price = form.price.state.value;
-        newBook.volume = form.volume.state.value;
+        if (form.pages.state.value) {
+            newBook.pageCount = form.pages.state.value;
+        }
+        if (form.price.state.value) {
+            newBook.price = form.price.state.value;
+        }
+        if (form.publisher.state.value) {
+            newBook.publisher = form.publisher.state.value;
+        }
+        if (this.props.book && this.props.book.volume) {
+            newBook.volume = form.volume.state.value;
+            newBook.collectionName = form.collection.state.value;
+        }
+
+        if (form.lastElement) {
+            newBook.lastElement = form.lastElement;
+        }
         newBook.isbn = this.props.book.isbn;
         newBook.type = 'book';
 
-        this.props.dispatch(sendBookAction(newBook));
+       this.props.dispatch(sendBookAction(newBook));
     }
 
     componentDidUpdate() {
         if (this.props.book.success) {
             this.resetComponent();
         }
+    }
+
+    renderCover() {
+        if (this.props.book && this.props.book.cover)
+            return (
+                <div className="column is-6-mobile is-offset-3-mobile">
+                    <img src={this.props.book.cover} alt="cover"/>
+                </div>
+            );
     }
 
     resetComponent() {
@@ -43,14 +68,45 @@ export default class AddValidationForm extends React.Component {
 
     render() {
         const form = {};
+        let collectionFields = null;
+
+        if (this.props.book && this.props.book.volume) {
+            collectionFields = (
+                <div>
+                    <FormInputComponent
+                        type="text"
+                        label="Collection"
+                        content={this.props.book && this.props.book.collection}
+                        ref={(node) => {
+                            return form.collection = node;
+                        }}
+                    />
+                    <div className="columns is-mobile">
+                        <FormInputComponent
+                            type="number"
+                            label="Volume"
+                            size="is-one-third-mobile"
+                            content={this.props.book && this.props.book.volume}
+                            ref={(node) => {
+                            return form.volume = node;
+                        }}
+                        />
+                        <CheckboxInputComponent
+                            label="Last Element"
+                            onChange={ (event) => {
+                            form.lastElement = event.target.checked;
+                        } }
+                        />
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <section className="spacer">
                 <form className="has-control-centered has-text-centered">
                     <div className="columns is-marginless">
-                        <div className="column is-6-mobile is-offset-3-mobile">
-                            <img src={this.props.book && this.props.book.cover} alt="cover"/>
-                        </div>
+                        { this.renderCover() }
                         <div className="column is-10-mobile is-offset-1-mobile">
                             <FormInputComponent
                                 type="text"
@@ -60,22 +116,7 @@ export default class AddValidationForm extends React.Component {
                                     return form.title = node;
                                 }}
                             />
-                            <FormInputComponent
-                                type="text"
-                                label="Collection"
-                                content={this.props.book && this.props.book.collection}
-                                ref={(node) => {
-                                    return form.collection = node;
-                                }}
-                            />
-                            <FormInputComponent
-                                type="number"
-                                label="Volume"
-                                content={this.props.book && this.props.book.volume}
-                                ref={(node) => {
-                                    return form.volume = node;
-                                }}
-                            />
+                            { collectionFields }
                             <FormInputComponent
                                 type="text"
                                 label="Author"
