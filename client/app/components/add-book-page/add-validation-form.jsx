@@ -81,20 +81,23 @@ export default class AddValidationForm extends React.Component {
                             return form.collection = node;
                         }}
                     />
-                    <FormInputComponent
-                        type="number"
-                        label="Volume"
-                        content={this.props.book && this.props.book.volume}
-                        ref={(node) => {
+                    <div className="columns is-mobile">
+                        <FormInputComponent
+                            type="number"
+                            label="Volume"
+                            size="is-one-third-mobile"
+                            content={this.props.book && this.props.book.volume}
+                            ref={(node) => {
                             return form.volume = node;
                         }}
-                    />
-                    <CheckboxInputComponent
-                        label="Last Element"
-                        onChange={ (event) => {
+                        />
+                        <CheckboxInputComponent
+                            label="Last Element"
+                            onChange={ (event) => {
                             form.lastElement = event.target.checked;
                         } }
-                    />
+                        />
+                    </div>
                 </div>
             );
         }
