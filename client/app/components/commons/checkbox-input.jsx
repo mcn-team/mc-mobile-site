@@ -14,7 +14,7 @@ export class CheckboxInputComponent extends React.Component {
 
     render() {
         return (
-            <section className="control">
+            <section className="control column auto checkbox-center">
                 <label className="label checkbox" htmlFor={this.props.label.toLocaleLowerCase()}>
                     <input
                         type="checkbox"
