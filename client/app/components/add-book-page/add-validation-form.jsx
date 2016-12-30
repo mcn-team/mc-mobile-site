@@ -3,45 +3,55 @@ import { browserHistory } from 'react-router';
 
 import FormInputComponent from '../commons/form-input';
 import { CheckboxInputComponent } from '../commons/checkbox-input';
+import ComboBoxComponent from '../commons/combo-box-component';
 import FormButtonComponent from '../commons/form-button';
 import { sendBookAction, PICKED_DATA_RESET } from './add-validation-actions';
+
+const bookTypes = [
+    { label: 'Book', value: 'book' },
+    { label: 'Comic', value: 'comics' },
+    { label: 'Manga', value: 'manga' }
+];
 
 export default class AddValidationForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.form = {};
+
         this.sendBook = this.sendBook.bind(this);
         this.resetComponent = this.resetComponent.bind(this);
         this.renderCover = this.renderCover.bind(this);
+        this.onTypeChanged = this.onTypeChanged.bind(this);
     }
 
-    sendBook(form) {
+    sendBook() {
         const newBook = {};
 
-        newBook.authors = [form.author.state.value];
+        newBook.authors = [this.form.author.state.value];
         if (this.props.book && this.props.book.cover) {
             newBook.cover = this.props.book.cover;
         }
-        newBook.title = form.title.state.value;
-        if (form.pages.state.value) {
-            newBook.pageCount = form.pages.state.value;
+        newBook.title = this.form.title.state.value;
+        if (this.form.pages.state.value) {
+            newBook.pageCount = this.form.pages.state.value;
         }
-        if (form.price.state.value) {
-            newBook.price = form.price.state.value;
+        if (this.form.price.state.value) {
+            newBook.price = this.form.price.state.value;
         }
-        if (form.publisher.state.value) {
-            newBook.publisher = form.publisher.state.value;
+        if (this.form.publisher.state.value) {
+            newBook.publisher = this.form.publisher.state.value;
         }
         if (this.props.book && this.props.book.volume) {
-            newBook.volume = form.volume.state.value;
-            newBook.collectionName = form.collection.state.value;
+            newBook.volume = this.form.volume.state.value;
+            newBook.collectionName = this.form.collection.state.value;
         }
 
-        if (form.lastElement) {
-            newBook.lastElement = form.lastElement;
+        if (this.form.lastElement) {
+            newBook.lastElement = this.form.lastElement;
         }
         newBook.isbn = this.props.book.isbn;
-        newBook.type = 'book';
+        newBook.type = this.form.type || 'book';
 
        this.props.dispatch(sendBookAction(newBook));
     }
@@ -66,8 +76,11 @@ export default class AddValidationForm extends React.Component {
         browserHistory.push('/home');
     }
 
+    onTypeChanged(event) {
+        this.form.type = event.target.value
+    }
+
     render() {
-        const form = {};
         let collectionFields = null;
 
         if (this.props.book && this.props.book.volume) {
@@ -78,7 +91,7 @@ export default class AddValidationForm extends React.Component {
                         label="Collection"
                         content={this.props.book && this.props.book.collection}
                         ref={(node) => {
-                            return form.collection = node;
+                            return this.form.collection = node;
                         }}
                     />
                     <div className="columns is-mobile">
@@ -88,13 +101,13 @@ export default class AddValidationForm extends React.Component {
                             size="is-one-third-mobile"
                             content={this.props.book && this.props.book.volume}
                             ref={(node) => {
-                            return form.volume = node;
+                            return this.form.volume = node;
                         }}
                         />
                         <CheckboxInputComponent
                             label="Last Element"
                             onChange={ (event) => {
-                            form.lastElement = event.target.checked;
+                                this.form.lastElement = event.target.checked;
                         } }
                         />
                     </div>
@@ -108,12 +121,19 @@ export default class AddValidationForm extends React.Component {
                     <div className="columns is-marginless">
                         { this.renderCover() }
                         <div className="column is-10-mobile is-offset-1-mobile">
+                            <ComboBoxComponent
+                                label="Type"
+                                content={ bookTypes }
+                                size="full"
+                                style="input-style"
+                                onChange={ this.onTypeChanged }
+                            />
                             <FormInputComponent
                                 type="text"
                                 label="Title"
                                 content={this.props.book && this.props.book.title}
                                 ref={(node) => {
-                                    return form.title = node;
+                                    return this.form.title = node;
                                 }}
                             />
                             { collectionFields }
@@ -122,7 +142,7 @@ export default class AddValidationForm extends React.Component {
                                 label="Author"
                                 content={this.props.book && this.props.book.author}
                                 ref={(node) => {
-                                    return form.author = node;
+                                    return this.form.author = node;
                                 }}
                             />
                             <FormInputComponent
@@ -130,7 +150,7 @@ export default class AddValidationForm extends React.Component {
                                 label="Publisher"
                                 content={this.props.book && this.props.book.publisher}
                                 ref={(node) => {
-                                    return form.publisher = node;
+                                    return this.form.publisher = node;
                                 }}
                             />
                             <FormInputComponent
@@ -138,7 +158,7 @@ export default class AddValidationForm extends React.Component {
                                 label="Pages"
                                 content={this.props.book && this.props.book.pages}
                                 ref={(node) => {
-                                    return form.pages = node;
+                                    return this.form.pages = node;
                                 }}
                             />
                             <FormInputComponent
@@ -146,7 +166,7 @@ export default class AddValidationForm extends React.Component {
                                 label="Price"
                                 content={this.props.book && this.props.book.price}
                                 ref={(node) => {
-                                    return form.price = node;
+                                    return this.form.price = node;
                                 }}
                             />
                             <div className="columns is-marginless is-mobile has-text-centered">
@@ -156,7 +176,7 @@ export default class AddValidationForm extends React.Component {
                                         text="SEND"
                                         type="submit"
                                         action={() => {
-                                            this.sendBook(form);
+                                            this.sendBook();
                                         }}
                                     />
                                 </div>
