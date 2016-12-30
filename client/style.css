@@ -95,8 +95,10 @@ input:-moz-placeholder { color:#444; }
   position: absolute;
   top: 5px;
   right: 5px;
+  font-size: 14px;
   padding: 10px;
 }
 .logout-button > i {
-  font-size: 22px;
+  font-size: 18px;
+  font-weight: bold;
 }
