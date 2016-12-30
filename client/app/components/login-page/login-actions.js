@@ -5,6 +5,11 @@ import { Config } from '../../config/config';
 export const LOGIN_START_TYPE = 'LOGIN_START';
 export const LOGIN_SUCCESS_TYPE = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL_TYPE = 'LOGIN_FAIL';
+export const RESET_DATA_TYPE = 'RESET_DATA';
+
+export const logoutAction = () => {
+    return { type: RESET_DATA_TYPE };
+};
 
 const LOGIN_SUCCESS = {
     type: LOGIN_SUCCESS_TYPE
