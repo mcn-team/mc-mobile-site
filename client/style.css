@@ -102,3 +102,8 @@ input:-moz-placeholder { color:#444; }
   font-size: 18px;
   font-weight: bold;
 }
+.input-style {
+  background: #dddddd;
+  color: #222324;
+  height: 32px;
+}
