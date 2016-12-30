@@ -91,3 +91,12 @@ input:-moz-placeholder { color:#444; }
   margin-left: 10px;
 }
 .checkbox-center { top: 30px; }
+.logout-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 10px;
+}
+.logout-button > i {
+  font-size: 22px;
+}

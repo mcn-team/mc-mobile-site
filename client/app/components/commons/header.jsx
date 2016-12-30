@@ -19,6 +19,10 @@ export default class HeaderComponent extends React.Component {
     render() {
         return (
             <section className="column is-12 has-text-centered spacer">
+                <span className="logout-button box">
+                    <i className="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout
+                </span>
                 <h2 className="title is-2">{this.props.title}</h2>
                 {this.subHeader}
             </section>
