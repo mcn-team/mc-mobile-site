@@ -105,6 +105,7 @@ export default class AddValidationForm extends React.Component {
                         }}
                         />
                         <CheckboxInputComponent
+                            containerStyle="control column auto checkbox-center"
                             label="Last Element"
                             onChange={ (event) => {
                                 this.form.lastElement = event.target.checked;

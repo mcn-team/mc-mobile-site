@@ -8,14 +8,15 @@ export class CheckboxInputComponent extends React.Component {
     static get propTypes() {
         return {
             label: React.PropTypes.string.isRequired,
-            onChange: React.PropTypes.func.isRequired
+            onChange: React.PropTypes.func.isRequired,
+            containerStyle: React.PropTypes.string
         };
     }
 
     render() {
         return (
-            <section className="control column auto checkbox-center">
-                <label className="label checkbox" htmlFor={this.props.label.toLocaleLowerCase()}>
+            <section className={ this.props.containerStyle }>
+                <label className="label checkbox">
                     <input
                         type="checkbox"
                         onChange={this.props.onChange}
