@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import Store from './store';
+import { McmsFooter } from './components/commons/footer-component';
 
 export default class App extends React.Component {
     render() {
@@ -9,6 +10,7 @@ export default class App extends React.Component {
             <Provider store={Store}>
                 <section>
                     {this.props.children}
+                    <McmsFooter />
                 </section>
             </Provider>
         );
