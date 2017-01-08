@@ -72,6 +72,20 @@ class ScanBookPageComponent extends React.Component {
         });
     }
 
+    renderRetryButton(label) {
+        return (
+            <div className="column">
+                <button type="button" className="button linear-grey"
+                        onClick={() => {
+                                        this.props.dispatch(scanFailedAction());
+                                    }}
+                >
+                    { label }
+                </button>
+            </div>
+        );
+    }
+
     renderConfirm(scannedCode) {
         function insert(str, index, value) {
             return str.substr(0, index) + value + str.substr(index);
@@ -79,34 +93,28 @@ class ScanBookPageComponent extends React.Component {
 
         return (
             <section className="spacer has-text-centered">
-                ISBN:
-                <span>{ insert(insert(scannedCode, 1, ' '), 8, ' ') }</span>
-                    <div className="columns is-marginless is-mobile">
-                        <div className="column">
-                            <LinkButton
-                                path={'/add/' + scannedCode}
-                                label="OK"
-                            />
-                        </div>
-                        <div className="column">
-                            <button type="button" className="button linear-grey"
-                                    onClick={() => {
-                                        this.props.dispatch(scanFailedAction());
-                                    }}
-                            >
-                                Retry
-                            </button>
-                        </div>
+                <div className="larger-font bottom-spacer">{ 'ISBN: ' + insert(insert(scannedCode, 1, ' '), 8, ' ') }</div>
+                <div className="columns is-marginless is-mobile">
+                    <div className="column">
+                        <LinkButton
+                            path={'/add/' + scannedCode}
+                            label="OK"
+                        />
                     </div>
+                    { this.renderRetryButton('Retry') }
+                </div>
             </section>
         );
     }
 
     renderScanner() {
         return (
-            <section>
+            <div>
+                <div className="columns is-marginless is-mobile has-text-centered">
+                    { this.renderRetryButton('Refocus camera') }
+                </div>
                 <div id="scan"></div>
-            </section>
+            </div>
         );
     }
 

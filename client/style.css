@@ -31,6 +31,7 @@ button.linear-grey,
 
 .help.larger { font-size: 14px; }
 
+.bottom-spacer,
 .box:not(:last-child).mini { margin-bottom: 15px; }
 
 strong,
@@ -108,3 +109,7 @@ input:-moz-placeholder { color:#444; }
   height: 32px;
 }
 .padding-10 { padding: 10px; }
+.larger-font {
+  font-size: 16px;
+  font-weight: bold;
+}
