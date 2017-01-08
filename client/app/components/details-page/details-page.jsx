@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import _ from 'lodash';
 
 import HeaderComponent from '../commons/header';
@@ -18,7 +17,6 @@ class DetailsPageComponent extends React.Component {
     componentWillMount() {
         if (!Authentication.isUserLoggedIn()) {
             Authentication.dropCredentials();
-            browserHistory.push('/');
         }
     }
 

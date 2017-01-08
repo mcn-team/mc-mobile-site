@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router';
+
 import { SessionStorage, LocalStorage } from './browser-storages';
 
 class AuthenticationHelper {
@@ -35,6 +37,7 @@ class AuthenticationHelper {
         SessionStorage.removeItem('token');
         LocalStorage.removeItem('user');
         LocalStorage.removeItem('token');
+        browserHistory.push('/');
     }
 
     getUserToken() {

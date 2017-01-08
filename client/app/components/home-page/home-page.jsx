@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import HomeMenu from './home-menu';
@@ -13,7 +12,6 @@ export default class HomePage extends React.Component {
     componentWillMount() {
         if (!Authentication.isUserLoggedIn()) {
             Authentication.dropCredentials();
-            browserHistory.push('/');
         }
     }
 
