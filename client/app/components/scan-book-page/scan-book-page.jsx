@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import Quagga from 'quagga';
 
 import HeaderComponent from '../commons/header';
@@ -19,7 +18,6 @@ class ScanBookPageComponent extends React.Component {
     componentWillMount() {
         if (!Authentication.isUserLoggedIn()) {
             Authentication.dropCredentials();
-            browserHistory.push('/');
         }
     }
 
