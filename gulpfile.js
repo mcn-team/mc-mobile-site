@@ -9,6 +9,7 @@ const webpack = require('webpack');
 const _ = require('lodash');
 const inject = require('gulp-inject');
 const rimraf = require('rimraf');
+const del = require('del');
 
 const JS_FILES = [
     'client/app/**/*.js'
@@ -91,7 +92,7 @@ gulp.task('watch', ['browsersync'], () => {
 gulp.task('serve', ['clean', 'watch']);
 
 gulp.task('clean', () => {
-    rimraf('./client/dist/', () => {});
+    return del.sync('./client/dist/');
 });
 
 gulp.task('build', ['clean','bundle']);
