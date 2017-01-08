@@ -9,6 +9,7 @@ const webpack = require('webpack');
 const _ = require('lodash');
 const inject = require('gulp-inject');
 const rimraf = require('rimraf');
+const del = require('del');
 
 const JS_FILES = [
     'client/app/**/*.js'
@@ -18,8 +19,14 @@ const JSX_FILES = [
 ];
 const CSS_FILES = [
     'node_modules/bulma/css/bulma.css',
+    'node_modules/font-awesome/css/font-awesome.css',
     'client/style.css'
 ];
+
+const FONTS_FILES = [
+    'node_modules/font-awesome/fonts/*.*'
+];
+
 const BUNDLE_FILES = [
     'client/dist/bundle.js',
     'client/dist/style.css'
@@ -44,7 +51,12 @@ gulp.task('libs', ['styles'], () => {
         .pipe(gulp.dest('client/dist/libs/'));
 });
 
-gulp.task('styles', ['assets'], () => {
+gulp.task('fonts', [], () => {
+    return gulp.src(FONTS_FILES)
+        .pipe(gulp.dest('client/dist/fonts/'));
+});
+
+gulp.task('styles', ['assets', 'fonts'], () => {
     return gulp.src(CSS_FILES)
         .pipe(gulp.dest('client/dist/css/'));
 });
@@ -80,7 +92,7 @@ gulp.task('watch', ['browsersync'], () => {
 gulp.task('serve', ['clean', 'watch']);
 
 gulp.task('clean', () => {
-    rimraf('./client/dist/', () => {});
+    return del.sync('./client/dist/');
 });
 
 gulp.task('build', ['clean','bundle']);

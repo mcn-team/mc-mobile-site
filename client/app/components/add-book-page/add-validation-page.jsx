@@ -14,7 +14,6 @@ class AddValidationPageComponent extends React.Component {
     componentWillMount() {
         if (!Authentication.isUserLoggedIn()) {
             Authentication.dropCredentials();
-            browserHistory.push('/');
         }
 
         if (Object.keys(this.props.book).length === 0) {

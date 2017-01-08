@@ -31,6 +31,7 @@ button.linear-grey,
 
 .help.larger { font-size: 14px; }
 
+.bottom-spacer,
 .box:not(:last-child).mini { margin-bottom: 15px; }
 
 strong,
@@ -91,3 +92,26 @@ input:-moz-placeholder { color:#444; }
   margin-left: 10px;
 }
 .checkbox-center { top: 30px; }
+.logout-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  padding: 10px;
+}
+.logout-button > i {
+  font-size: 18px;
+  font-weight: bold;
+}
+.input-style {
+  background: #dddddd;
+  color: #222324;
+  height: 32px;
+}
+.padding-10 { padding: 10px; }
+.larger-font {
+  font-size: 16px;
+  font-weight: bold;
+}
+footer > * { letter-spacing: 1px; }
+.mini-left-spacer { margin-left: 5%; }

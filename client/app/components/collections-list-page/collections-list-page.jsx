@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect as Connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
 import { fetchCollectionAction, DISPLAY_COLLECTION } from './collections-list-actions';
@@ -20,7 +19,6 @@ class CollectionsListPageComponent extends React.Component {
     componentWillMount() {
         if (!Authentication.isUserLoggedIn()) {
             Authentication.dropCredentials();
-            browserHistory.push('/');
         }
     }
 

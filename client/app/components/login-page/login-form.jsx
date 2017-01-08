@@ -6,6 +6,7 @@ import { loginAction } from './login-actions';
 import FormInputComponent from '../commons/form-input';
 import FormButtonComponent from '../commons/form-button';
 import { Authentication } from '../../utils/authentication-helper';
+import { CheckboxInputComponent } from '../commons/checkbox-input';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -25,6 +26,10 @@ class LoginForm extends React.Component {
         }
     }
 
+    onKeepLoggedInChecked(event) {
+        Authentication.keepLoggedIn(event.target.checked)
+    }
+
     render() {
         let form = {};
         return (
@@ -39,6 +44,11 @@ class LoginForm extends React.Component {
                                         ref={(node) => {
                                             return form.password = node;
                                         }}
+                    />
+                    <CheckboxInputComponent
+                        containerStyle="control padding-10"
+                        label="Remember me"
+                        onChange={ this.onKeepLoggedInChecked }
                     />
                     <FormButtonComponent
                         size="medium"

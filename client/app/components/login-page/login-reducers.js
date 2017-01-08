@@ -1,4 +1,4 @@
-import { LOGIN_FAIL_TYPE, LOGIN_START_TYPE, LOGIN_SUCCESS_TYPE }
+import { LOGIN_FAIL_TYPE, LOGIN_START_TYPE, LOGIN_SUCCESS_TYPE, RESET_DATA_TYPE }
     from './login-actions';
 
 const login = (state = {}, action) => {
@@ -9,6 +9,8 @@ const login = (state = {}, action) => {
             return Object.assign({}, state, { fetching: false, user: Object.assign({}, action.user), token: action.token, message: null });
         case LOGIN_FAIL_TYPE:
             return Object.assign({}, state, { fetching: false, status: action.status, message: action.message });
+        case RESET_DATA_TYPE:
+            return Object.assign({});
         default:
             return state;
     }
