@@ -30,11 +30,11 @@ class Header extends React.Component {
 
     renderLogoutButton() {
         return (
-            <button onClick={ this.onLogOut }>
-                    <span className="logout-button box">
-                        <i className="fa fa-sign-out" aria-hidden="true"></i>
-                        Logout
-                    </span>
+            <button onClick={ this.onLogOut } className="logout-button box is-hidden-tablet">
+                <span>
+                    <i className="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout
+                </span>
             </button>
         );
     }
