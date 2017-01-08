@@ -113,3 +113,5 @@ input:-moz-placeholder { color:#444; }
   font-size: 16px;
   font-weight: bold;
 }
+footer > * { letter-spacing: 1px; }
+.mini-left-spacer { margin-left: 5%; }
