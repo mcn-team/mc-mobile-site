@@ -16,6 +16,10 @@ export default class FormInputComponent extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({ value: nextProps.content || '' });
+    }
+
     inputChangeHandler(event) {
         this.setState({ value: event.target.value });
     }
