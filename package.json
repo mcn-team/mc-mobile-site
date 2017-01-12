@@ -13,6 +13,9 @@
   "keywords": [
     "media-collection"
   ],
+  "engines": {
+    "node": "4.4.4"
+  },
   "author": "Kaze",
   "license": "MIT",
   "bugs": {
