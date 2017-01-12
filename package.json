@@ -14,7 +14,8 @@
     "media-collection"
   ],
   "engines": {
-    "node": "4.4.4"
+    "node": "4.4.4",
+    "npm": "3.9.5"
   },
   "author": "Kaze",
   "license": "MIT",
