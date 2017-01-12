@@ -31,8 +31,10 @@ export default class AddValidationForm extends React.Component {
         this.resetComponent = this.resetComponent.bind(this);
         this.renderCover = this.renderCover.bind(this);
         this.onTypeChanged = this.onTypeChanged.bind(this);
-        this.renderMisspell = this.renderMisspell.bind(this);
-        this.onClickMisspell = this.onClickMisspell.bind(this);
+        this.renderAuthorMisspell = this.renderAuthorMisspell.bind(this);
+        this.renderCollectionMisspell = this.renderCollectionMisspell.bind(this);
+        this.onClickAuthorMisspell = this.onClickAuthorMisspell.bind(this);
+        this.onClickCollectionMisspell = this.onClickCollectionMisspell.bind(this);
     }
 
     componentDidMount() {
@@ -55,6 +57,21 @@ export default class AddValidationForm extends React.Component {
                 if (!response.error) {
                     response.data.then((parsedResponse) => {
                         this.setState({ existingAuthors: parsedResponse });
+                    });
+                }
+            });
+        httpClient.fetch(Config.baseUrl + '/api/books/collections/names', options)
+            .then((response) => {
+                if (response.ok) {
+                    return { data: response.json() };
+                } else {
+                    return { error: { code: response.status, err: response.statusText }, data: response.json() };
+                }
+            })
+            .then((response) => {
+                if (!response.error) {
+                    response.data.then((parsedResponse) => {
+                        this.setState({ existingCollections: parsedResponse });
                     });
                 }
             });
@@ -93,15 +110,16 @@ export default class AddValidationForm extends React.Component {
 
     componentDidUpdate() {
         const book = this.state.book;
-        const { existingAuthors, probableMisspell } = this.state;
+        const { existingAuthors, authorMisspell, existingCollections, collectionMisspell } = this.state;
 
         if (this.props.book.success) {
             this.resetComponent();
         }
 
         let misspell = null;
+        const newState = {};
 
-        if (probableMisspell === undefined && existingAuthors && existingAuthors.length > 0 && book && book.author) {
+        if (authorMisspell === undefined && existingAuthors && existingAuthors.length > 0 && book && book.author) {
             _.forEach(existingAuthors, (element) => {
                 const result = StringHelper.similarText(element, book.author, true);
 
@@ -110,7 +128,24 @@ export default class AddValidationForm extends React.Component {
                 }
             });
 
-            this.setState({ probableMisspell: misspell });
+            newState.authorMisspell = misspell;
+            misspell = null;
+        }
+
+        if (collectionMisspell === undefined && existingCollections && existingCollections.length > 0 && book && book.collection) {
+            _.forEach(existingCollections, (element) => {
+                const result = StringHelper.similarText(element, book.collection, true);
+
+                if (result > 65 && result < 100 && (!misspell || misspell.percent < result)) {
+                    misspell = { label: element, percent: result };
+                }
+            });
+
+            newState.collectionMisspell = misspell;
+        }
+
+        if (_.keys(newState).length > 0) {
+            this.setState(newState);
         }
     }
 
@@ -132,24 +167,50 @@ export default class AddValidationForm extends React.Component {
         this.form.type = event.target.value
     }
 
-    onClickMisspell(event) {
+    onClickAuthorMisspell(event) {
         event.preventDefault();
         this.setState({
-            book: Object.assign(this.props.book, { author: this.state.probableMisspell.label }),
-            probableMisspell: null
+            book: Object.assign(this.props.book, { author: this.state.authorMisspell.label }),
+            authorMisspell: null
         });
     }
 
-    renderMisspell() {
-        if (this.state && this.state.probableMisspell) {
-            const { probableMisspell } = this.state;
+    onClickCollectionMisspell(event) {
+        event.preventDefault();
+        this.setState({
+            book: Object.assign(this.props.book, { collection: this.state.collectionMisspell.label }),
+            collectionMisspell: null
+        });
+    }
 
-            if (probableMisspell) {
+    renderAuthorMisspell() {
+        if (this.state && this.state.authorMisspell) {
+            const { authorMisspell } = this.state;
+
+            if (authorMisspell) {
                 return (
                     <div className="bottom-spacer">
                         <span>Did you mean </span>
-                        <InlineButton onClick={ this.onClickMisspell }>
-                            { probableMisspell.label }
+                        <InlineButton onClick={ this.onClickAuthorMisspell }>
+                            { authorMisspell.label }
+                        </InlineButton>
+                        <span> ?</span>
+                    </div>
+                );
+            }
+        }
+    }
+
+    renderCollectionMisspell() {
+        if (this.state && this.state.collectionMisspell) {
+            const { collectionMisspell } = this.state;
+
+            if (collectionMisspell) {
+                return (
+                    <div className="mini-spacer bottom-spacer">
+                        <span>Did you mean </span>
+                        <InlineButton onClick={ this.onClickCollectionMisspell }>
+                            { collectionMisspell.label }
                         </InlineButton>
                         <span> ?</span>
                     </div>
@@ -172,6 +233,7 @@ export default class AddValidationForm extends React.Component {
                             return this.form.collection = node;
                         }}
                     />
+                    { this.renderCollectionMisspell() }
                     <div className="columns is-mobile">
                         <FormInputComponent
                             type="number"
@@ -224,7 +286,7 @@ export default class AddValidationForm extends React.Component {
                                     return this.form.author = node;
                                 }}
                             />
-                            { this.renderMisspell() }
+                            { this.renderAuthorMisspell() }
                             <FormInputComponent
                                 type="text"
                                 label="Publisher"

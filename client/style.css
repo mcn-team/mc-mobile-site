@@ -91,7 +91,7 @@ input:-moz-placeholder { color:#444; }
   color: #c8c8c8;
   margin-left: 10px;
 }
-.checkbox-center { top: 30px; }
+.checkbox-center > label { top: 30px; }
 .logout-button {
   position: absolute;
   top: 5px;
