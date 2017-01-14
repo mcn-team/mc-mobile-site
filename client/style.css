@@ -20,7 +20,8 @@ button.linear-grey,
   border-color: #000;
 }
 
-.control > input { background-color: #ddd }
+.control > input,
+.typeahead > input { background-color: #ddd }
 
 .title, .link-button a { color: #dddddd; }
 
@@ -91,7 +92,7 @@ input:-moz-placeholder { color:#444; }
   color: #c8c8c8;
   margin-left: 10px;
 }
-.checkbox-center { top: 30px; }
+.checkbox-center > label { top: 30px; }
 .logout-button {
   position: absolute;
   top: 5px;
@@ -115,3 +116,5 @@ input:-moz-placeholder { color:#444; }
 }
 footer > * { letter-spacing: 1px; }
 .mini-left-spacer { margin-left: 5%; }
+.typeahead > ul { margin-top: 2%; }
+.typeahead > ul > li { padding: 2%; }

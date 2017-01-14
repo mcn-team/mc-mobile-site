@@ -35,6 +35,7 @@ export default class FormInputComponent extends React.Component {
                 <p className="control">
                     <input
                         className="input"
+                        autoCapitalize={ this.props.forceLowerCase || this.props.type === 'password' ? 'off' : 'on' }
                         id={this.props.label.toLocaleLowerCase().replace(' ', '_')}
                         type={this.props.type}
                         placeholder={this.props.label}

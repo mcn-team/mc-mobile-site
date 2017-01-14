@@ -12,7 +12,6 @@ export class McmsFooter extends React.Component {
 
         return (
             <footer className="mini-spacer mini-left-spacer">
-                <small>Media Collection Team - </small>
                 <small>{ version }</small>
             </footer>
         );

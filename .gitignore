@@ -8,3 +8,6 @@ client/dist/
 
 # Logs
 *.log
+
+# System
+.DS_Store

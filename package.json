@@ -1,6 +1,6 @@
 {
   "name": "mc-mobile-site",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Media Collection Mobile Site - Light mobile to quickly see what's missing and what to buy",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,10 @@
   "keywords": [
     "media-collection"
   ],
+  "engines": {
+    "node": "4.4.4",
+    "npm": "3.9.5"
+  },
   "author": "Kaze",
   "license": "MIT",
   "bugs": {
@@ -48,6 +52,7 @@
     "react-dom": "15.2.1",
     "react-redux": "4.4.5",
     "react-router": "2.6.1",
+    "react-typeahead": "2.0.0-alpha.5",
     "redux": "3.5.2",
     "redux-thunk": "2.1.0",
     "whatwg-fetch": "1.0.0"
