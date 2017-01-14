@@ -11,7 +11,6 @@ export class FormTypeahead extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.refs.typeahead.setState({ entryValue: nextProps.value || '' });
-        this.setState({ value: nextProps.value });
     }
 
     render() {

@@ -39,6 +39,7 @@ export default class AddValidationForm extends React.Component {
         this.onClickCollectionMisspell = this.onClickCollectionMisspell.bind(this);
         this.evaluateMisspells = this.evaluateMisspells.bind(this);
         this.onAuthorOptionSelectedHandler = this.onAuthorOptionSelectedHandler.bind(this);
+        this.onCollectionOptionSelectedHandler = this.onCollectionOptionSelectedHandler.bind(this);
     }
 
     componentDidMount() {
@@ -102,7 +103,7 @@ export default class AddValidationForm extends React.Component {
         }
         if (this.state.book && this.state.book.volume) {
             newBook.volume = this.form.volume.state.value;
-            newBook.collectionName = this.form.collection.state.value;
+            newBook.collectionName = this.state.book.collection;
         }
 
         if (this.form.lastElement) {
@@ -110,9 +111,8 @@ export default class AddValidationForm extends React.Component {
         }
         newBook.isbn = this.state.book.isbn;
         newBook.type = this.form.type || 'book';
-        console.log(newBook);
 
-        // this.props.dispatch(sendBookAction(newBook));
+        this.props.dispatch(sendBookAction(newBook));
     }
 
     evaluateMisspells() {
@@ -188,6 +188,7 @@ export default class AddValidationForm extends React.Component {
 
     onClickCollectionMisspell(event) {
         event.preventDefault();
+
         this.setState({
             book: Object.assign(this.props.book, { collection: this.state.collectionMisspell.label }),
             collectionMisspell: null
@@ -237,20 +238,27 @@ export default class AddValidationForm extends React.Component {
         });
     }
 
+    onCollectionOptionSelectedHandler(option, event) {
+        this.setState({
+            book: Object.assign(this.props.book, { collection: option }),
+            collectionMisspell: null
+        });
+    }
+
     render() {
         let collectionFields = null;
-        const { existingAuthors } = this.state;
+        const { existingAuthors, existingCollections } = this.state;
 
         if (this.state.book && this.state.book.volume) {
             collectionFields = (
                 <div>
-                    <FormInputComponent
-                        type="text"
+                    <FormTypeahead
                         label="Collection"
-                        content={this.state.book && this.state.book.collection}
-                        ref={(node) => {
-                            return this.form.collection = node;
-                        }}
+                        options={ existingCollections }
+                        maxVisible={ 4 }
+                        customClasses={ { input: 'input' } }
+                        value={ this.state.book && this.state.book.collection }
+                        onOptionSelected={ this.onCollectionOptionSelectedHandler }
                     />
                     { this.renderCollectionMisspell() }
                     <div className="columns is-mobile">
@@ -304,9 +312,6 @@ export default class AddValidationForm extends React.Component {
                                 customClasses={ { input: 'input' } }
                                 value={ this.state.book && this.state.book.author }
                                 onOptionSelected={ this.onAuthorOptionSelectedHandler }
-                                ref={(node) => {
-                                    return this.form.author = node;
-                                }}
                             />
                             { this.renderAuthorMisspell() }
                             <FormInputComponent
