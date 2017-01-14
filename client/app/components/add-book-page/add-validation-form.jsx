@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { HttpClient } from 'aurelia-fetch-client';
 import _ from 'lodash';
+import { Typeahead } from 'react-typeahead';
 
 import FormInputComponent from '../commons/form-input';
 import { CheckboxInputComponent } from '../commons/checkbox-input';
@@ -9,6 +10,7 @@ import ComboBoxComponent from '../commons/combo-box-component';
 import FormButtonComponent from '../commons/form-button';
 import { sendBookAction, PICKED_DATA_RESET } from './add-validation-actions';
 import { InlineButton } from '../commons/inline-button';
+import { FormTypeahead } from '../commons/form-typeahead';
 
 import { Authentication } from '../../utils/authentication-helper';
 import { StringHelper } from '../../utils/strings-helper';
@@ -35,6 +37,8 @@ export default class AddValidationForm extends React.Component {
         this.renderCollectionMisspell = this.renderCollectionMisspell.bind(this);
         this.onClickAuthorMisspell = this.onClickAuthorMisspell.bind(this);
         this.onClickCollectionMisspell = this.onClickCollectionMisspell.bind(this);
+        this.evaluateMisspells = this.evaluateMisspells.bind(this);
+        this.onAuthorOptionSelectedHandler = this.onAuthorOptionSelectedHandler.bind(this);
     }
 
     componentDidMount() {
@@ -80,7 +84,9 @@ export default class AddValidationForm extends React.Component {
     sendBook() {
         const newBook = {};
 
-        newBook.authors = [this.form.author.state.value];
+        if (this.state.book && this.state.book.author) {
+            newBook.authors = [this.state.book.author];
+        }
         if (this.state.book && this.state.book.cover) {
             newBook.cover = this.state.book.cover;
         }
@@ -104,18 +110,14 @@ export default class AddValidationForm extends React.Component {
         }
         newBook.isbn = this.state.book.isbn;
         newBook.type = this.form.type || 'book';
+        console.log(newBook);
 
-        this.props.dispatch(sendBookAction(newBook));
+        // this.props.dispatch(sendBookAction(newBook));
     }
 
-    componentDidUpdate() {
+    evaluateMisspells() {
         const book = this.state.book;
         const { existingAuthors, authorMisspell, existingCollections, collectionMisspell } = this.state;
-
-        if (this.props.book.success) {
-            this.resetComponent();
-        }
-
         let misspell = null;
         const newState = {};
 
@@ -149,6 +151,14 @@ export default class AddValidationForm extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.book.success) {
+            this.resetComponent();
+        }
+
+        this.evaluateMisspells();
+    }
+
     renderCover() {
         if (this.state.book && this.state.book.cover)
             return (
@@ -169,6 +179,7 @@ export default class AddValidationForm extends React.Component {
 
     onClickAuthorMisspell(event) {
         event.preventDefault();
+
         this.setState({
             book: Object.assign(this.props.book, { author: this.state.authorMisspell.label }),
             authorMisspell: null
@@ -219,8 +230,16 @@ export default class AddValidationForm extends React.Component {
         }
     }
 
+    onAuthorOptionSelectedHandler(option, event) {
+        this.setState({
+            book: Object.assign(this.props.book, { author: option }),
+            authorMisspell: null
+        });
+    }
+
     render() {
         let collectionFields = null;
+        const { existingAuthors } = this.state;
 
         if (this.state.book && this.state.book.volume) {
             collectionFields = (
@@ -278,10 +297,13 @@ export default class AddValidationForm extends React.Component {
                                 }}
                             />
                             { collectionFields }
-                            <FormInputComponent
-                                type="text"
+                            <FormTypeahead
                                 label="Author"
-                                content={this.state.book && this.state.book.author}
+                                options={ existingAuthors }
+                                maxVisible={ 4 }
+                                customClasses={ { input: 'input' } }
+                                value={ this.state.book && this.state.book.author }
+                                onOptionSelected={ this.onAuthorOptionSelectedHandler }
                                 ref={(node) => {
                                     return this.form.author = node;
                                 }}
