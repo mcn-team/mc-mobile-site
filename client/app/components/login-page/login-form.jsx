@@ -35,21 +35,26 @@ class LoginForm extends React.Component {
         return (
             <section className="spacer column is-half-mobile is-offset-one-quarter-mobile has-text-centered">
                 <form className="has-control-centered">
-                    <FormInputComponent type="text" label="Login"
-                                        ref={(node) => {
-                                            return form.username = node;
-                                        }}
-                    />
-                    <FormInputComponent type="password" label="Password"
-                                        ref={(node) => {
-                                            return form.password = node;
-                                        }}
-                    />
+                    <FormInputComponent
+                        type="text"
+                        label="Login"
+                        forceLowerCase={ true }
+                        ref={(node) => {
+                            return form.username = node;
+                        } }
+                        />
+                    <FormInputComponent
+                        type="password"
+                        label="Password"
+                        ref={(node) => {
+                            return form.password = node;
+                        } }
+                        />
                     <CheckboxInputComponent
                         containerStyle="control padding-10"
                         label="Remember me"
-                        onChange={ this.onKeepLoggedInChecked }
-                    />
+                        onChange={this.onKeepLoggedInChecked}
+                        />
                     <FormButtonComponent
                         size="medium"
                         type="submit"
@@ -58,8 +63,8 @@ class LoginForm extends React.Component {
                             if (form.username) {
                                 this.props.dispatch(loginAction(form.username.state.value, form.password.state.value));
                             }
-                        }}
-                    />
+                        } }
+                        />
                 </form>
 
             </section>
