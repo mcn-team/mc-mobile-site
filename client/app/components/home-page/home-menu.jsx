@@ -8,10 +8,14 @@ export default class HomeMenu extends React.Component {
         super(props);
     }
 
+    changeHandler(data) {
+        //TODO: Implement handler
+    }
+
     render() {
         return (
-            <div className="columns is-mobile is-marginless" >
-                <div className="column is-6 is-offset-3 tile has-text-centered" >
+            <div className="columns is-mobile is-marginless">
+                <div className="column is-6 is-offset-3 tile has-text-centered">
                     <HomeButton
                         icon="dist/img/collections-icon.png"
                         label="Collections List"
@@ -22,11 +26,11 @@ export default class HomeMenu extends React.Component {
                         label="Scan Book"
                         path="/scan"
                     />
-                    <RadioButtonGroup>
-                        <RadioButton>
+                    <RadioButtonGroup onChange={ this.changeHandler } childContainerStyle="padding-10" selected="v2">
+                        <RadioButton value="v1">
                             Yo
                         </RadioButton>
-                        <RadioButton>
+                        <RadioButton name="v2" value="v2">
                             Salut
                         </RadioButton>
                     </RadioButtonGroup>

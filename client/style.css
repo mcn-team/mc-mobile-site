@@ -35,6 +35,7 @@ button.linear-grey,
 .bottom-spacer,
 .box:not(:last-child).mini { margin-bottom: 15px; }
 
+.strong,
 strong,
 select,
 a,
@@ -118,4 +119,4 @@ footer > * { letter-spacing: 1px; }
 .mini-left-spacer { margin-left: 5%; }
 .typeahead > ul { margin-top: 2%; }
 .typeahead > ul > li { padding: 2%; }
-.radio-button-group > * { display: inline-block; }
+.radio-button-group > .radio-button { display: inline-block; }
