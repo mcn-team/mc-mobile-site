@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HomeButton from './home-button';
+import { RadioButtonGroup, RadioButton } from '../commons/radio-button-group.component';
 
 export default class HomeMenu extends React.Component {
     constructor(props) {
@@ -21,6 +22,14 @@ export default class HomeMenu extends React.Component {
                         label="Scan Book"
                         path="/scan"
                     />
+                    <RadioButtonGroup>
+                        <RadioButton>
+                            Yo
+                        </RadioButton>
+                        <RadioButton>
+                            Salut
+                        </RadioButton>
+                    </RadioButtonGroup>
                 </div>
             </div>
 
