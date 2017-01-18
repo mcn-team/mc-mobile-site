@@ -1,5 +1,5 @@
 const baseUrl = 'https://m.dev.kaze-d.fr';
-const versionNumber = '0.4.0';
+const versionNumber = '0.4.1';
 
 export class Config {
     static get baseUrl() {

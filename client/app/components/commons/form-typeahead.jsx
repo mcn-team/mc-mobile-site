@@ -7,10 +7,16 @@ export class FormTypeahead extends React.Component {
 
         this.state = { value: props.value };
         this.classes = 'control';
+
+        this.updateStateHandler = this.updateStateHandler.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.refs.typeahead.setState({ entryValue: nextProps.value || '' });
+    }
+
+    updateStateHandler() {
+        this.props.onInputChange(this.refs.typeahead.state);
     }
 
     render() {
@@ -25,6 +31,7 @@ export class FormTypeahead extends React.Component {
                     <Typeahead
                         { ...this.props }
                         ref="typeahead"
+                        onBlur={ this.updateStateHandler }
                     />
                 </label>
             </section>
