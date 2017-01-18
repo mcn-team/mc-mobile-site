@@ -78,7 +78,7 @@ export class RadioButton extends React.Component {
         const classes = this.buildClasses();
 
         if (this.state.isActive) {
-            classes.push('strong');
+            classes.push('radio-selected');
         }
 
         return (
