@@ -13,10 +13,18 @@ export class RadioButtonGroup extends React.Component {
     }
 
     render() {
+        let classes = [ 'radio-button-group ' ];
+
+        if (this.props.containerStyle) {
+            classes = [
+                ...classes,
+                this.props.containerStyle.split(' ')
+            ]
+        }
+
         const childrenWithProps = React.Children.map(this.props.children, (child, index) => {
             const childProps = {
                 onChange: this.props.onChange,
-                inheritedStyle: this.props.childContainerStyle,
                 updateStatus: this.updateStatus,
                 id: index,
                 isActive: child.props.name ? this.state.active === child.props.name : this.state.active === index
@@ -26,7 +34,7 @@ export class RadioButtonGroup extends React.Component {
         });
 
         return (
-            <section className={ 'radio-button-group ' + this.props.containerStyle }>
+            <section className={ classes.join(' ') }>
                 { childrenWithProps }
             </section>
         );
@@ -55,13 +63,6 @@ export class RadioButton extends React.Component {
             ];
         }
 
-        if (inheritedStyle) {
-            classes = [
-                ...classes,
-                ...inheritedStyle.split(' ')
-            ];
-        }
-
         return classes;
     }
 
@@ -69,9 +70,17 @@ export class RadioButton extends React.Component {
         this.setState({ isActive });
     }
 
+    componentDidMount() {
+        if (this.state.isActive) {
+            this.props.onChange(this.props.value);
+        }
+    }
+
     onClick() {
-        this.props.updateStatus(this.props.name || this.props.id);
-        this.props.onChange(this.props.value);
+        if (!this.state.isActive) {
+            this.props.updateStatus(this.props.name || this.props.id);
+            this.props.onChange(this.props.value);
+        }
     }
 
     render() {

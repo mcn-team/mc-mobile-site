@@ -11,6 +11,7 @@ import FormButtonComponent from '../commons/form-button';
 import { sendBookAction, PICKED_DATA_RESET } from './add-validation-actions';
 import { InlineButton } from '../commons/inline-button';
 import { FormTypeahead } from '../commons/form-typeahead';
+import { RadioButtonGroup, RadioButton } from '../commons/radio-button-group.component';
 
 import { Authentication } from '../../utils/authentication-helper';
 import { StringHelper } from '../../utils/strings-helper';
@@ -40,6 +41,7 @@ export default class AddValidationForm extends React.Component {
         this.evaluateMisspells = this.evaluateMisspells.bind(this);
         this.onAuthorOptionSelectedHandler = this.onAuthorOptionSelectedHandler.bind(this);
         this.onCollectionOptionSelectedHandler = this.onCollectionOptionSelectedHandler.bind(this);
+        this.onReadChangeHandler = this.onReadChangeHandler.bind(this);
     }
 
     componentDidMount() {
@@ -111,6 +113,7 @@ export default class AddValidationForm extends React.Component {
         }
         newBook.isbn = this.state.book.isbn;
         newBook.type = this.form.type || 'book';
+        newBook.read = this.state.book.read || 'NOTREAD';
 
         this.props.dispatch(sendBookAction(newBook));
     }
@@ -233,16 +236,20 @@ export default class AddValidationForm extends React.Component {
 
     onAuthorOptionSelectedHandler(option, event) {
         this.setState({
-            book: Object.assign(this.props.book, { author: option }),
+            book: Object.assign(this.state.book, { author: option }),
             authorMisspell: null
         });
     }
 
     onCollectionOptionSelectedHandler(option, event) {
         this.setState({
-            book: Object.assign(this.props.book, { collection: option }),
+            book: Object.assign(this.state.book, { collection: option }),
             collectionMisspell: null
         });
+    }
+
+    onReadChangeHandler(readStatus) {
+        this.setState({ book: Object.assign(this.state.book, { read: readStatus }) });
     }
 
     render() {
@@ -338,6 +345,20 @@ export default class AddValidationForm extends React.Component {
                                     return this.form.price = node;
                                 }}
                             />
+
+                            <label className="label has-text-left">Read status</label>
+                            <RadioButtonGroup onChange={ this.onReadChangeHandler } selected="notread" containerStyle="mini-spacer">
+                                <RadioButton name="read" value="READ" containerStyle="padding-10 box valid">
+                                    Read
+                                </RadioButton>
+                                <RadioButton name="ongoing" value="ONGOING" containerStyle="padding-10 box neutral">
+                                    In progress
+                                </RadioButton>
+                                <RadioButton name="notread" value="NOTREAD" containerStyle="padding-10 box not-valid">
+                                    Not read
+                                </RadioButton>
+                            </RadioButtonGroup>
+
                             <div className="columns is-marginless is-mobile has-text-centered">
                                 <div className="column has-control-centered">
                                     <FormButtonComponent
