@@ -28,10 +28,10 @@ export default class HomeMenu extends React.Component {
                     />
                     <RadioButtonGroup onChange={ this.changeHandler } childContainerStyle="padding-10" selected="v2">
                         <RadioButton value="v1">
-                            Yo
+                            <img height="64" width="64" src="http://findicons.com/files/icons/719/crystal_clear_actions/128/agt_action_success_256.png" alt=""/>
                         </RadioButton>
                         <RadioButton name="v2" value="v2">
-                            Salut
+                            <img height="64" width="64" src="http://www.iconarchive.com/download/i22698/kyo-tux/aeon/Sign-Close.ico" alt=""/>
                         </RadioButton>
                     </RadioButtonGroup>
                 </div>

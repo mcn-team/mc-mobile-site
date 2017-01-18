@@ -77,9 +77,7 @@ export class RadioButton extends React.Component {
     render() {
         const classes = this.buildClasses();
 
-        if (this.state.isActive) {
-            classes.push('radio-selected');
-        }
+        this.state.isActive ? classes.push('radio-selected') : classes.push('radio-not-selected');
 
         return (
             <div className={ classes.join(' ') } onClick={ this.onClick }>

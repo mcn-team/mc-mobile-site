@@ -119,4 +119,14 @@ footer > * { letter-spacing: 1px; }
 .typeahead > ul { margin-top: 2%; }
 .typeahead > ul > li { padding: 2%; }
 .radio-button-group > .radio-button { display: inline-block; }
-.radio-selected { color: #63c55f; }
+.radio-selected {
+  color: #63c55f;
+  opacity: 1;
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+.radio-not-selected {
+  opacity: 0.5;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
