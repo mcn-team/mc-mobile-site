@@ -29,6 +29,7 @@ export default class ComboBoxComponent extends React.Component {
                         name={this.props.label.toLocaleLowerCase()}
                         id={this.props.label.toLocaleLowerCase()}
                         onChange={this.props.onChange}
+                        value={ this.props.defaultValue }
                     >
                         {this.props.content.map((element, index) => {
                             return (
