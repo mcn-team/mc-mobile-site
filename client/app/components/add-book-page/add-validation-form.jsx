@@ -27,8 +27,10 @@ export default class AddValidationForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.form = {};
-        this.state = { book: props.book };
+        this.state = {
+            book: props.book,
+            isCollection: props.book && props.book.volume
+        };
 
         this.sendBook = this.sendBook.bind(this);
         this.resetComponent = this.resetComponent.bind(this);
@@ -42,6 +44,8 @@ export default class AddValidationForm extends React.Component {
         this.onAuthorOptionSelectedHandler = this.onAuthorOptionSelectedHandler.bind(this);
         this.onCollectionOptionSelectedHandler = this.onCollectionOptionSelectedHandler.bind(this);
         this.onReadChangeHandler = this.onReadChangeHandler.bind(this);
+        this.onCollectionChangeHandler = this.onCollectionChangeHandler.bind(this);
+        this.onAuthorChangeHandler = this.onAuthorChangeHandler.bind(this);
     }
 
     componentDidMount() {
@@ -93,26 +97,26 @@ export default class AddValidationForm extends React.Component {
         if (this.state.book && this.state.book.cover) {
             newBook.cover = this.state.book.cover;
         }
-        newBook.title = this.form.title.state.value;
-        if (this.form.pages.state.value) {
-            newBook.pageCount = this.form.pages.state.value;
+        newBook.title = this.state.book.title;
+        if (this.state.book.pages) {
+            newBook.pageCount = this.state.book.pages;
         }
-        if (this.form.price.state.value) {
-            newBook.price = this.form.price.state.value;
+        if (this.state.book.price) {
+            newBook.price = this.state.book.price;
         }
-        if (this.form.publisher.state.value) {
-            newBook.publisher = this.form.publisher.state.value;
+        if (this.state.book.publisher) {
+            newBook.publisher = this.state.book.publisher;
         }
         if (this.state.book && this.state.book.volume) {
-            newBook.volume = this.form.volume.state.value;
+            newBook.volume = this.state.book.volume;
             newBook.collectionName = this.state.book.collection;
         }
 
-        if (this.form.lastElement) {
-            newBook.lastElement = this.form.lastElement;
+        if (this.state.book.lastElement) {
+            newBook.lastElement = this.state.book.lastElement;
         }
         newBook.isbn = this.state.book.isbn;
-        newBook.type = this.form.type || 'book';
+        newBook.type = this.state.book.type || 'book';
         newBook.read = this.state.book.read || 'NOTREAD';
 
         this.props.dispatch(sendBookAction(newBook));
@@ -185,7 +189,7 @@ export default class AddValidationForm extends React.Component {
     }
 
     onTypeChanged(event) {
-        this.form.type = event.target.value
+        this.setState({ book: Object.assign(this.state.book, { type: event.target.value }) });
     }
 
     onClickAuthorMisspell(event) {
@@ -242,14 +246,14 @@ export default class AddValidationForm extends React.Component {
         }
     }
 
-    onAuthorOptionSelectedHandler(option, event) {
+    onAuthorOptionSelectedHandler(option) {
         this.setState({
             book: Object.assign(this.state.book, { author: option }),
             authorMisspell: null
         });
     }
 
-    onCollectionOptionSelectedHandler(option, event) {
+    onCollectionOptionSelectedHandler(option) {
         this.setState({
             book: Object.assign(this.state.book, { collection: option }),
             collectionMisspell: null
@@ -260,11 +264,19 @@ export default class AddValidationForm extends React.Component {
         this.setState({ book: Object.assign(this.state.book, { read: readStatus }) });
     }
 
+    onCollectionChangeHandler({ entryValue }) {
+        this.setState({ book: Object.assign(this.state.book, { collection: entryValue }) });
+    }
+
+    onAuthorChangeHandler({ entryValue }) {
+        this.setState({ book: Object.assign(this.state.book, { author: entryValue }) });
+    }
+
     render() {
         let collectionFields = null;
         const { existingAuthors, existingCollections } = this.state;
 
-        if (this.state.book && this.state.book.volume) {
+        if (this.state.isCollection) {
             collectionFields = (
                 <div>
                     <FormTypeahead
@@ -274,6 +286,7 @@ export default class AddValidationForm extends React.Component {
                         customClasses={ { input: 'input' } }
                         value={ this.state.book && this.state.book.collection }
                         onOptionSelected={ this.onCollectionOptionSelectedHandler }
+                        onInputChange={ this.onCollectionChangeHandler }
                     />
                     { this.renderCollectionMisspell() }
                     <div className="columns is-mobile">
@@ -282,15 +295,13 @@ export default class AddValidationForm extends React.Component {
                             label="Volume"
                             size="is-one-third-mobile"
                             content={this.state.book && this.state.book.volume}
-                            ref={(node) => {
-                            return this.form.volume = node;
-                        }}
+                            onUpdate={ (value) => { this.setState({ book: Object.assign(this.state.book, { volume: value }) }) } }
                         />
                         <CheckboxInputComponent
                             containerStyle="control column auto checkbox-center"
                             label="Last Element"
                             onChange={ (event) => {
-                                this.form.lastElement = event.target.checked;
+                                this.setState({ book: Object.assign(this.state.book, { lastElement: event.target.checked }) });
                         } }
                         />
                     </div>
@@ -315,9 +326,7 @@ export default class AddValidationForm extends React.Component {
                                 type="text"
                                 label="Title"
                                 content={this.state.book && this.state.book.title}
-                                ref={(node) => {
-                                    return this.form.title = node;
-                                }}
+                                onUpdate={ (value) => { this.setState({ book: Object.assign(this.state.book, { title: value }) }) } }
                             />
                             { collectionFields }
                             <FormTypeahead
@@ -327,31 +336,26 @@ export default class AddValidationForm extends React.Component {
                                 customClasses={ { input: 'input' } }
                                 value={ this.state.book && this.state.book.author }
                                 onOptionSelected={ this.onAuthorOptionSelectedHandler }
+                                onInputChange={ this.onAuthorChangeHandler }
                             />
                             { this.renderAuthorMisspell() }
                             <FormInputComponent
                                 type="text"
                                 label="Publisher"
                                 content={this.state.book && this.state.book.publisher}
-                                ref={(node) => {
-                                    return this.form.publisher = node;
-                                }}
+                                onUpdate={ (value) => { this.setState({ book: Object.assign(this.state.book, { publisher: value }) }) } }
                             />
                             <FormInputComponent
                                 type="number"
                                 label="Pages"
                                 content={this.state.book && this.state.book.pages}
-                                ref={(node) => {
-                                    return this.form.pages = node;
-                                }}
+                                onUpdate={ (value) => { this.setState({ book: Object.assign(this.state.book, { pages: value }) }) } }
                             />
                             <FormInputComponent
                                 type="number"
                                 label="Price"
                                 content={this.state.book && this.state.book.price}
-                                ref={(node) => {
-                                    return this.form.price = node;
-                                }}
+                                onUpdate={ (value) => { this.setState({ book: Object.assign(this.state.book, { price: value }) }) } }
                             />
 
                             <label className="label has-text-left">Read status</label>
