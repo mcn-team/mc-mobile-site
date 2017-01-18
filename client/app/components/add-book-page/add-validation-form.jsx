@@ -128,7 +128,7 @@ export default class AddValidationForm extends React.Component {
             _.forEach(existingAuthors, (element) => {
                 const result = StringHelper.similarText(element, book.author, true);
 
-                if (result > 65 && result < 100 && (!misspell || misspell.percent < result)) {
+                if (result > 65 && (!misspell || misspell.percent < result)) {
                     misspell = { label: element, percent: result };
                 }
             });
@@ -141,12 +141,20 @@ export default class AddValidationForm extends React.Component {
             _.forEach(existingCollections, (element) => {
                 const result = StringHelper.similarText(element, book.collection, true);
 
-                if (result > 65 && result < 100 && (!misspell || misspell.percent < result)) {
+                if (result > 65 && (!misspell || misspell.percent < result)) {
                     misspell = { label: element, percent: result };
                 }
             });
 
             newState.collectionMisspell = misspell;
+        }
+
+        if (newState.authorMisspell && newState.authorMisspell.percent === 100) {
+            delete newState.authorMisspell;
+        }
+
+        if (newState.collectionMisspell && newState.collectionMisspell.percent === 100) {
+            delete newState.collectionMisspell;
         }
 
         if (_.keys(newState).length > 0) {
