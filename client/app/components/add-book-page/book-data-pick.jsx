@@ -40,6 +40,7 @@ export default class BookDataPick extends React.Component {
     }
 
     onTitleChange(event) {
+        console.log(event.target.value.trim());
         this.pickedData.title = event.target.value.trim();
         this.dispatchPickedData()
     }
@@ -79,13 +80,13 @@ export default class BookDataPick extends React.Component {
 
     render() {
         const titleData = [
-            '-- No title --',
-            ...this.props.bookData.title
+            ...this.props.bookData.title,
+            '-- No title --'
         ]
 
         return (
             <section className="spacer has-control-centered columns">
-                <ComboBoxComponent size="large" label="Title" content={ titleData } onChange={this.onTitleChange} defaultValue={ this.props.bookData.title[0] }/>
+                <ComboBoxComponent size="large" label="Title" content={ titleData } onChange={this.onTitleChange}/>
                 { this.renderCollectionFields() }
                 <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} onChange={this.onPriceChange} />
                 <div className="columns is-marginless is-mobile has-text-centered">
