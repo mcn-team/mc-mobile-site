@@ -118,3 +118,20 @@ footer > * { letter-spacing: 1px; }
 .mini-left-spacer { margin-left: 5%; }
 .typeahead > ul { margin-top: 2%; }
 .typeahead > ul > li { padding: 2%; }
+.radio-button-group > .radio-button { display: inline-block; }
+.radio-selected {
+  color: #63c55f;
+  opacity: 1;
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+.radio-not-selected {
+  opacity: 0.5;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  color: #c8c8c8 !important;
+}
+.neutral { color: #0bb0f5; }
+.valid { color: #63c55f; }
+.not-valid { color: #e41a01; }
+.radio-button-group > .radio-button:not(:first-child) { margin-left: 10px; }

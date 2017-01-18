@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HomeButton from './home-button';
+import { RadioButtonGroup, RadioButton } from '../commons/radio-button-group.component';
 
 export default class HomeMenu extends React.Component {
     constructor(props) {
@@ -9,8 +10,8 @@ export default class HomeMenu extends React.Component {
 
     render() {
         return (
-            <div className="columns is-mobile is-marginless" >
-                <div className="column is-6 is-offset-3 tile has-text-centered" >
+            <div className="columns is-mobile is-marginless">
+                <div className="column is-6 is-offset-3 tile has-text-centered">
                     <HomeButton
                         icon="dist/img/collections-icon.png"
                         label="Collections List"
@@ -23,7 +24,6 @@ export default class HomeMenu extends React.Component {
                     />
                 </div>
             </div>
-
         );
     }
 }
