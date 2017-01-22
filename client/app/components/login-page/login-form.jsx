@@ -11,6 +11,11 @@ import { CheckboxInputComponent } from '../commons/checkbox-input';
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {};
+        this.onUsernameChange = this.onUsernameChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onLogin = this.onLogin.bind(this);
     }
 
     componentWillMount() {
@@ -30,8 +35,25 @@ class LoginForm extends React.Component {
         Authentication.keepLoggedIn(event.target.checked)
     }
 
+    onUsernameChange(value) {
+        this.setState({ username: value });
+    }
+
+    onPasswordChange(value) {
+        this.setState({ password: value });
+    }
+
+    onLogin() {
+        const { username, password } = this.state;
+
+        if (username) {
+            this.props.dispatch(loginAction(username, password));
+        }
+    }
+
     render() {
-        let form = {};
+        const { username, password } = this.state;
+
         return (
             <section className="spacer column is-half-mobile is-offset-one-quarter-mobile has-text-centered">
                 <form className="has-control-centered">
@@ -39,16 +61,14 @@ class LoginForm extends React.Component {
                         type="text"
                         label="Login"
                         forceLowerCase={ true }
-                        ref={(node) => {
-                            return form.username = node;
-                        } }
+                        content={ username }
+                        onUpdate={ this.onUsernameChange }
                         />
                     <FormInputComponent
                         type="password"
                         label="Password"
-                        ref={(node) => {
-                            return form.password = node;
-                        } }
+                        content={ password }
+                        onUpdate={ this.onPasswordChange }
                         />
                     <CheckboxInputComponent
                         containerStyle="control padding-10"
@@ -59,14 +79,9 @@ class LoginForm extends React.Component {
                         size="medium"
                         type="submit"
                         text="Sign in"
-                        action={() => {
-                            if (form.username) {
-                                this.props.dispatch(loginAction(form.username.state.value, form.password.state.value));
-                            }
-                        } }
+                        action={ this.onLogin }
                         />
                 </form>
-
             </section>
         );
     }
