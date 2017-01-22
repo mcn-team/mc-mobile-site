@@ -4,6 +4,8 @@ import ComboBoxComponent from '../commons/combo-box-component';
 import LinkButton from '../commons/link-button';
 import { updatePickedData } from './add-validation-actions';
 
+import { SessionStorage } from '../../utils/browser-storages';
+
 export default class BookDataPick extends React.Component {
     constructor(props) {
         super(props);
@@ -40,7 +42,6 @@ export default class BookDataPick extends React.Component {
     }
 
     onTitleChange(event) {
-        console.log(event.target.value.trim());
         this.pickedData.title = event.target.value.trim();
         this.dispatchPickedData()
     }
@@ -64,6 +65,8 @@ export default class BookDataPick extends React.Component {
         if (this.pickedData.title === '-- No title --') {
             delete this.pickedData.title;
         }
+
+        SessionStorage.setItem('picked', this.pickedData);
         this.props.dispatch(updatePickedData(this.pickedData));
     }
 

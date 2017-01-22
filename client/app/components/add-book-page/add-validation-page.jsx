@@ -3,12 +3,17 @@ import { connect as Connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import HeaderComponent from '../commons/header';
-import { Authentication } from '../../utils/authentication-helper';
 import AddValidationForm from './add-validation-form';
+import { PICKED_DATA_RESET } from './add-validation-actions';
+
+import { Authentication } from '../../utils/authentication-helper';
+import { SessionStorage } from '../../utils/browser-storages';
 
 class AddValidationPageComponent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = { pickedData: SessionStorage.getItem('picked') };
     }
 
     componentWillMount() {
@@ -16,8 +21,17 @@ class AddValidationPageComponent extends React.Component {
             Authentication.dropCredentials();
         }
 
-        if (Object.keys(this.props.book).length === 0) {
-            browserHistory.push('/');
+        if (!this.state.pickedData) {
+            browserHistory.push('/home');
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.book.data && this.props.book.data.success) {
+            this.props.dispatch(PICKED_DATA_RESET);
+            browserHistory.push('/home');
+            SessionStorage.removeItem('picked');
+            SessionStorage.removeItem('book');
         }
     }
 
@@ -25,7 +39,7 @@ class AddValidationPageComponent extends React.Component {
         return (
             <section className="columns is-marginless">
                 <HeaderComponent title="Media Collection" subtitle="Validate book"/>
-                <AddValidationForm book={this.props.book.data} dispatch={(action) => {
+                <AddValidationForm book={ this.state.pickedData } dispatch={(action) => {
                     this.props.dispatch(action);
                 }}/>
             </section>
