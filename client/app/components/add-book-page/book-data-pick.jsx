@@ -91,7 +91,7 @@ export default class BookDataPick extends React.Component {
             <section className="spacer has-control-centered columns">
                 <ComboBoxComponent size="large" label="Title" content={ titleData } onChange={this.onTitleChange}/>
                 { this.renderCollectionFields() }
-                <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} onChange={this.onPriceChange} />
+                { this.props.bookData.price && <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} onChange={this.onPriceChange} /> }
                 <div className="columns is-marginless is-mobile has-text-centered">
                     <div className="column">
                         <LinkButton

@@ -22,7 +22,9 @@ export default class FormInputComponent extends React.Component {
 
     inputChangeHandler(event) {
         this.setState({ value: event.target.value });
-        this.props.onUpdate(event.target.value);
+        if (this.props.onUpdate) {
+            this.props.onUpdate(event.target.value);
+        }
     }
 
     render() {
