@@ -66,6 +66,10 @@ export default class BookDataPick extends React.Component {
             delete this.pickedData.title;
         }
 
+        if (this.pickedData.price === '-- No price --') {
+            delete this.pickedData.price;
+        }
+
         SessionStorage.setItem('picked', this.pickedData);
         this.props.dispatch(updatePickedData(this.pickedData));
     }
@@ -87,11 +91,16 @@ export default class BookDataPick extends React.Component {
             '-- No title --'
         ]
 
+        const priceData = [
+            ...this.props.bookData.price,
+            '-- No price --'
+        ];
+
         return (
             <section className="spacer has-control-centered columns">
                 <ComboBoxComponent size="large" label="Title" content={ titleData } onChange={this.onTitleChange}/>
                 { this.renderCollectionFields() }
-                { this.props.bookData.price && <ComboBoxComponent size="small" label="Price" content={this.props.bookData.price} onChange={this.onPriceChange} /> }
+                { this.props.bookData.price && <ComboBoxComponent size="small" label="Price" content={ priceData } onChange={this.onPriceChange} /> }
                 <div className="columns is-marginless is-mobile has-text-centered">
                     <div className="column">
                         <LinkButton
