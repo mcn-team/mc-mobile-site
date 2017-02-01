@@ -16,6 +16,7 @@ import { RadioButtonGroup, RadioButton } from '../commons/radio-button-group.com
 import { Authentication } from '../../utils/authentication-helper';
 import { StringHelper } from '../../utils/strings-helper';
 import { Config } from '../../config/config';
+import { SessionStorage } from '../../utils/browser-storages';
 
 const bookTypes = [
     { label: 'Book', value: 'book' },
@@ -27,9 +28,11 @@ export default class AddValidationForm extends React.Component {
     constructor(props) {
         super(props);
 
+        const localData = SessionStorage.getItem('picked');
+
         this.state = {
-            book: props.book,
-            isCollection: props.book && props.book.volume
+            book: props.book || localData,
+            isCollection: props.book ? props.book.volume : localData.volume
         };
 
         this.sendBook = this.sendBook.bind(this);
@@ -167,7 +170,7 @@ export default class AddValidationForm extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.book.success) {
+        if (this.props.book && this.props.book.success) {
             this.resetComponent();
         }
 
@@ -192,22 +195,26 @@ export default class AddValidationForm extends React.Component {
         this.setState({ book: Object.assign(this.state.book, { type: event.target.value }) });
     }
 
-    onClickAuthorMisspell(event) {
+    onClickAuthorMisspell(event, isCancelled) {
         event.preventDefault();
+        let newState = { authorMisspell: null };
 
-        this.setState({
-            book: Object.assign(this.props.book, { author: this.state.authorMisspell.label }),
-            authorMisspell: null
-        });
+        if (!isCancelled) {
+            newState.book = Object.assign(this.state.book , { author: this.state.authorMisspell.label })
+        }
+
+        this.setState(newState);
     }
 
-    onClickCollectionMisspell(event) {
+    onClickCollectionMisspell(event, isCancelled) {
         event.preventDefault();
+        let newState = { collectionMisspell: null };
 
-        this.setState({
-            book: Object.assign(this.props.book, { collection: this.state.collectionMisspell.label }),
-            collectionMisspell: null
-        });
+        if (!isCancelled) {
+            newState.book = Object.assign(this.state.book , { collection: this.state.collectionMisspell.label })
+        }
+
+        this.setState(newState);
     }
 
     renderAuthorMisspell() {
@@ -222,6 +229,9 @@ export default class AddValidationForm extends React.Component {
                             { authorMisspell.label }
                         </InlineButton>
                         <span> ?</span>
+                        <InlineButton onClick={ (event) => { this.onClickAuthorMisspell(event, true); } }>
+                            <span> No</span>
+                        </InlineButton>
                     </div>
                 );
             }
@@ -240,6 +250,9 @@ export default class AddValidationForm extends React.Component {
                             { collectionMisspell.label }
                         </InlineButton>
                         <span> ?</span>
+                        <InlineButton onClick={ (event) => { this.onClickCollectionMisspell(event, true); } }>
+                            <span> No</span>
+                        </InlineButton>
                     </div>
                 );
             }
