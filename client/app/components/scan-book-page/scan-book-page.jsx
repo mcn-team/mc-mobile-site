@@ -36,39 +36,50 @@ class ScanBookPageComponent extends React.Component {
     }
 
     quaggaInitialization() {
-        Quagga.init({
-            inputStream : {
-                name : "Live",
-                type : "LiveStream",
-                target: document.querySelector('#scan'),
-                constraints: {
-                    width: 1920,
-                    height: 1080,
-                    facingMode: "environment"
-                }
-            },
-            decoder : {
-                readers : ["ean_reader"],
-                multiple: false
-            },
-            locator: {
-                halfSample: true,
-                patchSize: "large"
-            },
-            numOfWorkers: 4,
-            locate: false
-        }, (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
+        navigator.mediaDevices.enumerateDevices()
+            .then((devices) => {
+                console.log(devices);
+                return devices.filter(device => device.kind === 'videoinput' && device.label.indexOf('back') !== -1);
+            })
+            .then((backFacingDevices) => {
+                const devices = backFacingDevices.map((device) => {
+                    return device.deviceId;
+                });
+                Quagga.init({
+                    inputStream : {
+                        name : "Live",
+                        type : "LiveStream",
+                        target: document.querySelector('#scan'),
+                        constraints: {
+                            width: 1920,
+                            height: 1080,
+//                                facingMode: { exact: "environment" }
+                            deviceId: devices[0]
+                        }
+                    },
+                    decoder : {
+                        readers : ["ean_reader"],
+                        multiple: false
+                    },
+                    locator: {
+                        halfSample: true,
+                        patchSize: "large"
+                    },
+                    numOfWorkers: 4,
+                    locate: false
+                }, (err) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
 
-            Quagga.start();
-        });
+                    Quagga.start();
+                });
 
-        Quagga.onDetected((data) => {
-            Quagga.stop();
-            this.props.dispatch(scanCompletedAction(data.codeResult.code));
+                Quagga.onDetected((data) => {
+                    Quagga.stop();
+                    this.props.dispatch(scanCompletedAction(data.codeResult.code));
+                });
         });
     }
 

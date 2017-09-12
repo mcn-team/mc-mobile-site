@@ -47,7 +47,7 @@
     "js-md5": "0.4.1",
     "jsencrypt": "2.3.1",
     "lodash": "4.14.1",
-    "quagga": "0.11.3",
+    "quagga": "0.12.1",
     "react": "15.2.1",
     "react-dom": "15.2.1",
     "react-redux": "4.4.5",
