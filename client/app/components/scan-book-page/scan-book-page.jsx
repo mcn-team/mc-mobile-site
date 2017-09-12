@@ -44,7 +44,7 @@ class ScanBookPageComponent extends React.Component {
                 constraints: {
                     width: 1920,
                     height: 1080,
-                    facingMode: "environment"
+                    facing: "environment"
                 }
             },
             decoder : {
