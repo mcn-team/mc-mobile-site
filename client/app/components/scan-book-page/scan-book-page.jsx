@@ -36,6 +36,15 @@ class ScanBookPageComponent extends React.Component {
     }
 
     quaggaInitialization() {
+        // navigator.mediaDevices.enumerateDevices()
+        //     .then((devices) => {
+        //         return devices.filter(device => device.kind === 'videoinput' && device.label.indexOf('back') !== -1);
+        //     })
+        //     .then((backFacingDevices) => {
+        //         console.log(backFacingDevices.map((device) => {
+        //             return device.deviceId;
+        //         }))
+        //     });
         Quagga.init({
             inputStream : {
                 name : "Live",
@@ -44,7 +53,7 @@ class ScanBookPageComponent extends React.Component {
                 constraints: {
                     width: 1920,
                     height: 1080,
-                    facing: "environment"
+                    facingMode: "user"
                 }
             },
             decoder : {
