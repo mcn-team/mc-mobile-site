@@ -16,9 +16,9 @@ class ScanBookPageComponent extends React.Component {
     }
 
     componentWillMount() {
-        // if (!Authentication.isUserLoggedIn()) {
-        //     Authentication.dropCredentials();
-        // }
+        if (!Authentication.isUserLoggedIn()) {
+            Authentication.dropCredentials();
+        }
     }
 
     componentDidMount() {
